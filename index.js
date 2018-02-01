@@ -6,19 +6,8 @@ var app = express();
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
-var connection_string;
-if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD){
-    connection_string = process.env.OPENSHIFT_MONGODB_DB_USERNAME + ":" +
-    process.env.OPENSHIFT_MONGODB_DB_PASSWORD + "@" +
-    process.env.OPENSHIFT_MONGODB_DB_HOST + ':' +
-    process.env.OPENSHIFT_MONGODB_DB_PORT + '/' +
-    process.env.OPENSHIFT_APP_NAME;
-  }
-try {
-    mongoose.connect(connection_string);
-} catch (e) {
-    console.log('Database Error');
-}
+var connection_string='mongodb://nisaruj:VRzyQeghliGHeVuS@memz-shard-00-00-svjat.mongodb.net:27017,memz-shard-00-01-svjat.mongodb.net:27017,memz-shard-00-02-svjat.mongodb.net:27017/test?ssl=true&replicaSet=memz-shard-0&authSource=admin';
+mongoose.connect(connection_string);
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
