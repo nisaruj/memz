@@ -5,6 +5,8 @@ var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
+
+var connection_string;
 if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD){
     connection_string = process.env.OPENSHIFT_MONGODB_DB_USERNAME + ":" +
     process.env.OPENSHIFT_MONGODB_DB_PASSWORD + "@" +
@@ -12,7 +14,11 @@ if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD){
     process.env.OPENSHIFT_MONGODB_DB_PORT + '/' +
     process.env.OPENSHIFT_APP_NAME;
   }
-mongoose.connect(connection_string);
+try {
+    mongoose.connect(connection_string);
+} catch (e) {
+    console.log('Database Error');
+}
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
