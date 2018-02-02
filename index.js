@@ -28,7 +28,16 @@ app.get('/lesson',function(req,res){
 
 app.get('/lesson/:lesson_id',function(req,res){
     Lesson.findOne({lesson_id: req.params.lesson_id},function(err,lesson_res){
-        res.render('lesson',{_lesson:lesson_res})
+        res.render('lesson',{_lesson:lesson_res});
+    });
+});
+
+app.get('/lesson/:lesson_id/review',function(req,res){
+    Lesson.findOne({lesson_id: req.params.lesson_id},function(err,lesson_res){
+        var index = Math.floor(Math.random() * lesson_res.vocab.length);
+        res.render('lesson_review',{lesson_name: lesson_res.name,
+            lesson_course: lesson_res.course,
+            quiz: lesson_res.vocab[index]});
     });
 });
 
