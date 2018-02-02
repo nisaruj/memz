@@ -5,9 +5,14 @@ var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
+var wanakana = require('wanakana');
 
 var connection_string='mongodb://nisaruj:VRzyQeghliGHeVuS@memz-shard-00-00-svjat.mongodb.net:27017,memz-shard-00-01-svjat.mongodb.net:27017,memz-shard-00-02-svjat.mongodb.net:27017/test?ssl=true&replicaSet=memz-shard-0&authSource=admin';
 mongoose.connect(connection_string);
+
+var server = app.listen(server_port, function(){
+    console.log('Listening on port %d',server_port);
+});
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -15,6 +20,14 @@ app.use(bodyParser.json());
 app.set('view engine','ejs');
 
 var Lesson = require('./models/lesson');
+
+var io = require('socket.io').listen(server);
+io.on('connection', function(socket) {
+    socket.on('answerbox', function(msg) {
+        io.emit('answerbox',wanakana.toKana(msg));
+    });
+    console.log('Connected');
+});
 
 app.get('/',function(req,res){
     res.redirect('/lesson');
@@ -39,6 +52,7 @@ app.get('/lesson/:lesson_id/review',function(req,res){
             lesson_course: lesson_res.course,
             quiz: lesson_res.vocab[index]});
     });
+
 });
 
 /*app.get('/newlesson',function(req,res){
@@ -47,6 +61,3 @@ app.get('/lesson/:lesson_id/review',function(req,res){
         if (err) throw err;
     });
 });*/
-
-app.listen(server_port);
-console.log('Listening on port %d',server_port);
