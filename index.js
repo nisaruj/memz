@@ -21,14 +21,6 @@ app.set('view engine','ejs');
 
 var Lesson = require('./models/lesson');
 
-var io = require('socket.io').listen(server);
-io.on('connection', function(socket) {
-    socket.on('answerbox', function(msg) {
-        io.emit('answerbox',wanakana.toKana(msg));
-    });
-    console.log('Connected');
-});
-
 app.get('/',function(req,res){
     res.redirect('/lesson');
 });
@@ -47,12 +39,13 @@ app.get('/lesson/:lesson_id',function(req,res){
 
 app.get('/lesson/:lesson_id/review',function(req,res){
     Lesson.findOne({lesson_id: req.params.lesson_id},function(err,lesson_res){
-        var index = Math.floor(Math.random() * lesson_res.vocab.length);
+        //var index = Math.floor(Math.random() * lesson_res.vocab.length);
         res.render('lesson_review',{lesson_name: lesson_res.name,
             lesson_course: lesson_res.course,
-            quiz: lesson_res.vocab[index]});
+            lid: lesson_res.id,
+            quiz: lesson_res.vocab
+        });
     });
-
 });
 
 /*app.get('/newlesson',function(req,res){

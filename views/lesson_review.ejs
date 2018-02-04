@@ -6,45 +6,36 @@
     <meta charset="utf-8" />
     <style>
         log_msg {
-          color: blue;
-          margin: 16px;
+          color: rgb(0, 26, 255);
+          margin: 18px;
         }
     </style>
 </head>
-<script src="/socket.io/socket.io.js"></script>
 <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
-<script>
-    $('#m').bind('input', function(){
-        console.log('this actually works');
-    });
-    $(function () {
-        var socket = io();
-        $('#m').bind('input', function(){
-            socket.emit('answerbox', $('#m').val());
-            return false;
-            console.log('this actually works');
-        });
-        socket.on('answerbox', function(msg){
-            $('log_msg').text(msg);
-        });
-    });
-</script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 <body>
+    <% var index = Math.floor(Math.random() * quiz.length); %>
     <div class="card text-center">
         <h3><%= lesson_name %></h3>
         <h4><%= lesson_course %></h4>
         <div class="card-header">
           Review
         </div>
-        <form action="/" method="post" id='form'>
+        <form action="" id="form">
             <div class="card-body w-50" style="margin: 0 auto;">
-                <h2 class="card-title"><%= quiz.meaning %></h2>
+                <h2 class="card-title"><%= quiz[index].meaning %></h2>
                 <div class="form-group">
                         <input class="form-control" name="answer" type="text" id='m' autofocus>
                 </div>
-                <log_msg>...</log_msg><br>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </div>
         </form>
     </div>
 </body>
+<script src="https://unpkg.com/wanakana"></script>
+<script>
+    var getQuiz = <%- JSON.stringify(quiz) %>;
+    console.log(getQuiz);
+    const textInput = document.querySelector('#m');
+    wanakana.bind(textInput);
+</script>
