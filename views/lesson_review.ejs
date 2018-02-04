@@ -4,38 +4,58 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <meta charset="utf-8" />
-    <style>
-        log_msg {
-          color: rgb(0, 26, 255);
-          margin: 18px;
-        }
-    </style>
 </head>
 <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<script src="https://unpkg.com/wanakana"></script>
 <body>
-    <% var index = Math.floor(Math.random() * quiz.length); %>
     <div class="card text-center">
         <h3><%= lesson_name %></h3>
         <h4><%= lesson_course %></h4>
         <div class="card-header">
           Review
         </div>
-        <form action="" id="form">
-            <div class="card-body w-50" style="margin: 0 auto;">
-                <h2 class="card-title"><%= quiz[index].meaning %></h2>
-                <div class="form-group">
-                        <input class="form-control" name="answer" type="text" id='m' autofocus>
+        <div ng-app="qform" ng-controller="qform-control" ng-init="forminit()">
+            <form id="form">
+                <div class="card-body w-50" style="margin: 0 auto;">
+                    <h2 class="card-title">{{curQuiz}}</h2>
+                    <div class="form-group">
+                        <input ng-class="inputclass" name="answer" type="text" id='m' ng-model="answer" autofocus>
+                    </div>
+                    <button type="submit" class="btn btn-primary" ng-click="check()">Submit</button>
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
 </body>
-<script src="https://unpkg.com/wanakana"></script>
 <script>
     var getQuiz = <%- JSON.stringify(quiz) %>;
     console.log(getQuiz);
+    var index;
+    var curQuiz;
     const textInput = document.querySelector('#m');
     wanakana.bind(textInput);
+    var app = angular.module('qform',[]);
+    app.controller('qform-control', function($scope) {
+        $scope.randquiz = function() {
+            index = Math.floor(Math.random() * getQuiz.length);
+            $scope.curQuiz = getQuiz[index].meaning;
+            console.log('Rand new question. : %s',getQuiz[index].meaning);
+        };
+        $scope.forminit = function() {
+            $scope.inputclass = "form-control";
+            $scope.randquiz();
+        };
+        $scope.check = function() {
+            if ($scope.answer == getQuiz[index].word) {
+                $scope.inputclass = "form-control is-valid";
+                console.log("Correct! The answer is %s",getQuiz[index].word);
+                $scope.randquiz();
+            } else {
+                $scope.inputclass = "form-control is-invalid";
+                console.log("Wrong! The answer is %s",getQuiz[index].word);
+            }
+            $scope.answer = null;
+        };
+    })
 </script>
