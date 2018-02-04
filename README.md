@@ -1,8 +1,8 @@
 # memz
-Flashcard web application.
+Flashcard web application made by Express + Mongoose + Angular.
 
 ### Demo ###
 > https://memzzz.herokuapp.com/
 
 ### Team ###
-> [Nisaruj Rattanaaram](github.com/nisaruj)
+> [Nisaruj Rattanaaram](https://github.com/nisaruj)
