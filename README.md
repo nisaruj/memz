@@ -1,4 +1,8 @@
 # memz
-Flashcard web application
+Flashcard web application.
 
-### let's try! : [Here](https://memzzz.herokuapp.com/)
+### Demo ###
+> https://memzzz.herokuapp.com/
+
+### Team ###
+> [Nisaruj Rattanaaram](github.com/nisaruj)
