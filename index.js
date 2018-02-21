@@ -7,7 +7,9 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var wanakana = require('wanakana');
 
-var connection_string='mongodb://nisaruj:VRzyQeghliGHeVuS@memz-shard-00-00-svjat.mongodb.net:27017,memz-shard-00-01-svjat.mongodb.net:27017,memz-shard-00-02-svjat.mongodb.net:27017/test?ssl=true&replicaSet=memz-shard-0&authSource=admin';
+var db_user = process.env.DB_USER || "YOUR_DATABASE_USERNAME";
+var db_pass = process.env.DB_PASS || "YOUR_DATABASE_PASSWORD";
+var connection_string = process.env.DB_STR || "YOUR_DATABASE_URI_STRING";
 mongoose.connect(connection_string);
 
 var server = app.listen(server_port, function(){
