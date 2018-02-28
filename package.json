@@ -13,7 +13,6 @@
     "ejs": "^2.5.7",
     "express": "^4.16.2",
     "mongoose": "^5.0.2",
-    "socket.io": "^2.0.4",
     "wanakana": "^2.3.4"
   }
 }
