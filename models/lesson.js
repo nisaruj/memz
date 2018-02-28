@@ -5,6 +5,7 @@ var lessonSchema = new Schema({
     lesson_id: Number,
     course: String,
     name: String,
+    lang: String,
     vocab_size: Number,
     vocab: [{ id: Number, word: String, meaning: String}] 
 });

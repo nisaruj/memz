@@ -45,6 +45,7 @@ app.get('/lesson/:lesson_id/review',function(req,res){
         res.render('lesson_review',{lesson_name: lesson_res.name,
             lesson_course: lesson_res.course,
             lid: lesson_res.id,
+            lang: lesson_res.lang,
             quiz: lesson_res.vocab
         });
     });

@@ -12,6 +12,7 @@
         <% for(var i=0; i < _lesson.length; i++) { %>
             <tr>
                 <td><%= _lesson[i].course %> - <%= _lesson[i].name %></td>
+                <td><%= _lesson[i].lang %></td>
                 <td><a href="/lesson/<%= _lesson[i].lesson_id %>" class="btn btn-success" role="button">Here</a></td>
             </tr>
         <% } %>

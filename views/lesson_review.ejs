@@ -30,11 +30,14 @@
 </body>
 <script>
     var getQuiz = <%- JSON.stringify(quiz) %>;
+    var getLang = <%- JSON.stringify(lang) %>;
     console.log(getQuiz);
     var index;
     var curQuiz;
     const textInput = document.querySelector('#m');
-    wanakana.bind(textInput);
+    if (getLang == 'jp') {
+        wanakana.bind(textInput);
+    }
     var app = angular.module('qform',[]);
     app.controller('qform-control', function($scope) {
         $scope.randquiz = function() {
