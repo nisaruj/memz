@@ -14,6 +14,8 @@ And just run `npm start ` yay! :smiley:
 ## TODO ##
 - Add config file
 - Add admin panel
+- Add language ico
+- Add skip button
 
 ## Dependencies ##
 - body-parser 1.18.2
