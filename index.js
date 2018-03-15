@@ -53,7 +53,7 @@ app.get('/lesson/:lesson_id/review',function(req,res){
 
 app.get('/admin',function(req,res){
     Lesson.find({},function(err,lesson_res){
-        res.render('index',{_lesson:lesson_res});
+        res.render('admin',{_lesson:lesson_res});
     });
 });
 
