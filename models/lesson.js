@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var lessonSchema = new Schema({
+    avail: Boolean,
     lesson_id: Number,
     course: String,
     name: String,

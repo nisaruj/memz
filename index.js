@@ -28,7 +28,7 @@ app.get('/',function(req,res){
 });
 
 app.get('/lesson',function(req,res){
-    Lesson.find({},function(err,lesson_res){
+    Lesson.find({avail: true},function(err,lesson_res){
         res.render('index',{_lesson:lesson_res});
     });
 });
@@ -48,6 +48,12 @@ app.get('/lesson/:lesson_id/review',function(req,res){
             lang: lesson_res.lang,
             quiz: lesson_res.vocab
         });
+    });
+});
+
+app.get('/admin',function(req,res){
+    Lesson.find({},function(err,lesson_res){
+        res.render('index',{_lesson:lesson_res});
     });
 });
 

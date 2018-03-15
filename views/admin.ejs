@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="//github.com/downloads/lafeber/world-flags-sprite/flags32.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <meta charset="utf-8" />
+</head>
+<body>
+    <h1>Admin Panel</h1>
+    <h3>List of all lessons</h3>
+    <table class="table table-striped">
+        <% for(var i=0; i < _lesson.length; i++) { %>
+            <tr>
+                <td><%= _lesson[i].course %> - <%= _lesson[i].name %></td>
+                <td>
+                    <div class="f32">
+                        <% if (_lesson[i].lang == 'jp') { %>
+                            <span class="flag jp"></span>
+                        <% } else { %>
+                            <span class="flag gb"></span>
+                        <% } %>
+                    </div>
+                </td>
+                <td><input type="checkbox" class="form-check-input" id="checkbox"></td>
+            </tr>
+        <% } %>
+    </table>
+</body>
