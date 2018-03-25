@@ -63,6 +63,7 @@ app.post('/admin',function(req,res){
     Lesson.find({},function(err,lesson_res){
         for (var i=0;i<lesson_res.length;i++) {
             lesson_res[i].avail = is_avail.has(i);
+            console.log(is_avail.has(i));
             Lesson.update({_id: lesson_res[i]._id}, {avail: lesson_res[i].avail},function(err,aff) {
                 console.log('Updated %d',aff);
             });
