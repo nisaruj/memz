@@ -64,12 +64,12 @@ app.post('/admin',function(req,res){
         for (var i=0;i<lesson_res.length;i++) {
             lesson_res[i] = is_avail.has(i);
         }
-        lesson_res.save(function (err) { 
+        lesson_res.save(function (err, lesson_res) { 
             if (err) {
                 console.log(err);
             }
+            res.render('admin',{_lesson:lesson_res});
         });
-        res.render('admin',{_lesson:lesson_res});
     });
 });
 
