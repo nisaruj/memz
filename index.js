@@ -57,6 +57,10 @@ app.get('/admin',function(req,res){
     });
 });
 
+app.post('/admin',function(req,res){
+    console.log(req.avail);
+});
+
 /*app.get('/newlesson',function(req,res){
     var les = new Lesson({})
     les.save(function(err){
