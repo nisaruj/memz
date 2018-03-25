@@ -64,6 +64,7 @@ app.post('/admin',function(req,res){
         for (var i=0;i<lesson_res.length;i++) {
             lesson_res[i].avail = is_avail.has(i);
         }
+        console.log(lesson_res);
         lesson_res.save(function (err, lesson_res) { 
             if (err) {
                 console.log(err);
