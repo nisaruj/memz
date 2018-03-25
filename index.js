@@ -62,7 +62,7 @@ app.post('/admin',function(req,res){
     const is_avail = new Set(req.body.avail);
     Lesson.find({},function(err,lesson_res){
         for (var i=0;i<lesson_res.length;i++) {
-            lesson_res[i] = is_avail.has(i);
+            lesson_res[i].avail = is_avail.has(i);
         }
         lesson_res.save(function (err, lesson_res) { 
             if (err) {
