@@ -10,29 +10,36 @@
     <h1>Admin Panel</h1>
     <h3>List of all lessons</h3>
     <form action="/admin" method="post">
-    <table class="table table-striped">
-        <% for(var i=0; i < _lesson.length; i++) { %>
-            <tr>
-                <td><%= _lesson[i].course %> - <%= _lesson[i].name %></td>
-                <td>
-                    <div class="f32">
-                        <% if (_lesson[i].lang == 'jp') { %>
-                            <span class="flag jp"></span>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Lesson Name</th>
+                    <th scope="col">Lang</th>
+                    <th scope="col">Avail</th>
+                </tr>
+            </thead>
+            <% for(var i=0; i < _lesson.length; i++) { %>
+                <tr>
+                    <td><%= _lesson[i].course %> - <%= _lesson[i].name %></td>
+                    <td>
+                        <div class="f32">
+                            <% if (_lesson[i].lang == 'jp') { %>
+                                <span class="flag jp"></span>
+                            <% } else { %>
+                                <span class="flag gb"></span>
+                            <% } %>
+                        </div>
+                    </td>
+                    <td>
+                        <% if (_lesson[i].avail) { %>
+                            <input type="checkbox" class="form-check-input" name="avail[]" value=<%= i %> checked>
                         <% } else { %>
-                            <span class="flag gb"></span>
+                            <input type="checkbox" class="form-check-input" name="avail[]" value=<%= i %> >
                         <% } %>
-                    </div>
-                </td>
-                <td>
-                    <% if (_lesson[i].avail) { %>
-                        <input type="checkbox" class="form-check-input" name="avail[]" value=<%= i %> checked>
-                    <% } else { %>
-                        <input type="checkbox" class="form-check-input" name="avail[]" value=<%= i %> >
-                    <% } %>
-                </td>
-            </tr>
-        <% } %>
-    </table>
-    <input type="submit" value="Update">
+                    </td>
+                </tr>
+            <% } %>
+        </table>
+        <input class="btn btn-primary" type="submit" value="Update">
     </form>
 </body>
