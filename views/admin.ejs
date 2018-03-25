@@ -22,7 +22,7 @@
                         <% } %>
                     </div>
                 </td>
-                <td><input type="checkbox" class="form-check-input" name="avail[]" value=<%= i%> ></td>
+                <td><input type="checkbox" class="form-check-input" name="avail[]" value=<%= i %> <%= if (_lesson[i].avail) {%> checked <%= } %> ></td>
             </tr>
         <% } %>
     </table>
