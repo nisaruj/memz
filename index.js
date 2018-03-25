@@ -59,6 +59,9 @@ app.get('/admin',function(req,res){
 
 app.post('/admin',function(req,res){
     console.log(req.body.avail);
+    Lesson.find({},function(err,lesson_res){
+        res.render('admin',{_lesson:lesson_res});
+    });
 });
 
 /*app.get('/newlesson',function(req,res){
