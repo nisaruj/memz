@@ -58,7 +58,7 @@ app.get('/admin',function(req,res){
 });
 
 app.post('/admin',function(req,res){
-    console.log(req.avail);
+    console.log(req.body.avail);
 });
 
 /*app.get('/newlesson',function(req,res){
