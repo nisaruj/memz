@@ -63,7 +63,7 @@ app.post('/admin',function(req,res){
     Lesson.find({},function(err,lesson_res){
         for (var i=0;i<lesson_res.length;i++) {
             lesson_res[i].avail = is_avail.has(i);
-            Model.update({_id: lesson_res[i]._id}, {$set: {avail: lesson_res[i].avail}});
+            Lesson.update({_id: lesson_res[i]._id}, {$set: {avail: lesson_res[i].avail}});
         }
         console.log(lesson_res);
         res.render('admin',{_lesson:lesson_res});
