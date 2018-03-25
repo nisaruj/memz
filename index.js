@@ -59,18 +59,14 @@ app.get('/admin',function(req,res){
 
 app.post('/admin',function(req,res){
     console.log(req.body.avail);
-    const is_avail = new Set(req.body.avail);
+    const is_avail = new Set(req.body.avail.map(parseInt));
     Lesson.find({},function(err,lesson_res){
         for (var i=0;i<lesson_res.length;i++) {
             lesson_res[i].avail = is_avail.has(i);
+            Model.update({_id: lesson_res[i]._id}, {$set: {avail: lesson_res[i].avail}});
         }
         console.log(lesson_res);
-        lesson_res.save(function (err, lesson_res) { 
-            if (err) {
-                console.log(err);
-            }
-            res.render('admin',{_lesson:lesson_res});
-        });
+        res.render('admin',{_lesson:lesson_res});
     });
 });
 
