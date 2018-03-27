@@ -13,7 +13,7 @@ var mupload = multer({dest: 'tmp/'});
 
 var db_user = process.env.DB_USER || "YOUR_DATABASE_USERNAME";
 var db_pass = process.env.DB_PASS || "YOUR_DATABASE_PASSWORD";
-var connection_string = process.env.DB_STR || "mongodb://nisaruj:6LJLbOFRQaR49nn2@memz-shard-00-00-svjat.mongodb.net:27017,memz-shard-00-01-svjat.mongodb.net:27017,memz-shard-00-02-svjat.mongodb.net:27017/test?ssl=true&replicaSet=memz-shard-0&authSource=admin";
+var connection_string = process.env.DB_STR || "YOUR_URI_STRING";
 mongoose.connect(connection_string);
 
 var server = app.listen(server_port, function(){
