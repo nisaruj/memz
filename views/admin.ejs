@@ -15,6 +15,7 @@
                 <thead>
                     <tr>
                         <th scope="col">Lesson Name</th>
+                        <th scope="col">LID</th>
                         <th scope="col">Lang</th>
                         <th scope="col">Avail</th>
                     </tr>
@@ -22,6 +23,7 @@
                 <% for(var i=0; i < _lesson.length; i++) { %>
                     <tr>
                         <td><%= _lesson[i].course %> - <%= _lesson[i].name %></td>
+                        <td><%= _lesson[i].lesson_id %></td>
                         <td>
                             <div class="f32">
                                 <% if (_lesson[i].lang == 'jp') { %>
@@ -44,7 +46,7 @@
             <input class="btn btn-primary" type="submit" value="Update">
         </form>
         <br>
-        <form action="/admin/newlesson" enctype="multipart/form-data" method="post">
+        <form action="/admin/newlesson/confirm" enctype="multipart/form-data" method="post">
             <input class="btn btn-primary" type="submit" value="Upload csv">
             <input type="file" name="csv_upload">
         </form>

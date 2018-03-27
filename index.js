@@ -80,7 +80,7 @@ app.post('/admin',function(req,res){
     });
 });
 
-app.post('/admin/newlesson',mupload.single('csv_upload'), function (req,res) {
+app.post('/admin/newlesson/confirm',mupload.single('csv_upload'), function (req,res) {
     console.log('csv uploaded : %s',req.file.path);
     fs.readFile(req.file.path,'utf8',function(err,output) {
         csv_parse(output, function(err,parsed_data) {
@@ -90,9 +90,41 @@ app.post('/admin/newlesson',mupload.single('csv_upload'), function (req,res) {
     });
 })
 
-/*app.get('/newlesson',function(req,res){
-    var les = new Lesson({})
-    les.save(function(err){
-        if (err) throw err;
+app.post('/admin/newlesson', function(req,res) {
+    var wordlist = [];
+    for(var i=0;i<req.body.word.length;i++) {
+        wordlist.push({
+            id: i+1,
+            word: req.body.word[i],
+            meaning: req.body.meaning[i]
+        })
+    }
+    var les = {
+        avail: true,
+        lesson_id: parseInt(req.body.lid),
+        course: req.body.course_name ,
+        name: req.body.lesson_name,
+        lang: req.body.lang,
+        vocab: wordlist,
+        vocab_size: req.body.word.length
+    };
+    var newlesson = new Lesson(les);
+    console.log(les);
+    Lesson.count({lesson_id: parseInt(req.body.lid)}, function(err,count) {
+        if (count > 0) {
+            console.log('Duplicate lid');
+            res.send('<pre>Duplicate lid. Try again later.</pre>');
+        } else {
+            newlesson.save(function(err) {
+                if (err) {
+                    console.log('Something went wrong. Try again later.');
+                    console.log(err);
+                    res.send('<pre>Something went wrong. Try again later.</pre>');
+                } else {
+                    console.log('Save successfully');
+                    res.redirect('/admin');
+                }
+            });
+        }
     });
-});*/
+});

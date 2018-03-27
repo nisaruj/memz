@@ -10,21 +10,42 @@
     <div class="container">
         <h1><p class="text-center">New lesson</p></h1>
         <h3><p class="text-center">Lesson info</p></h3>
-        <table class="table table-striped">
-            <thead>
+        <form action="/admin/newlesson" method="post">
+            <table class="table">
                 <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Vocab</th>
-                    <th scope="col">Meaning</th>
+                    <td style="width: 15%">Course Name</td>
+                    <td><input type="text" name="course_name" value="My course"></td>
                 </tr>
-            </thead>
-            <% for(var i=0;i<data.length;i++) { %>
                 <tr>
-                    <td><%= i+1 %></td>
-                    <td><%= data[i][0] %></td>
-                    <td><%= data[i][1] %></td>
+                    <td style="width: 15%">Lesson Name</td>
+                    <td><input type="text" name="lesson_name" value="My new lesson"></td>
                 </tr>
-            <% } %>
-        </table>
+                <tr>
+                    <td style="width: 15%">Lesson ID</td>
+                    <td><input type="text" name="lid" value=""></td>
+                </tr>
+                <tr>
+                    <td style="width: 15%">Language</td>
+                    <td><input type="text" name="lang" value="en"></td>
+                </tr>
+            </table>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Vocab</th>
+                        <th scope="col">Meaning</th>
+                    </tr>
+                </thead>
+                <% for(var i=0;i<data.length;i++) { %>
+                    <tr>
+                        <td><%= i+1 %></td>
+                        <td><input type="text" name="word[]" value=<%= data[i][0] %>></td>
+                        <td><input type="text" name="meaning[]" value=<%= data[i][1] %>></td>
+                    </tr>
+                <% } %>
+            </table>
+            <input class="btn btn-primary" type="submit" value="Confirm">
+        </form>
     </div>
 </body>
