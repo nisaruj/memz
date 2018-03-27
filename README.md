@@ -12,10 +12,10 @@ var connection_string = process.env.DB_STR || "YOUR_DATABASE_URI_STRING";
 And just run `npm start ` yay! :smiley:
 
 ## TODO ##
-- Add config file
-- Add admin panel
-- Add language ico
-- Add skip button
+- [x] Add admin panel
+- [x] Add language icon
+- [x] Add skip button
+- [ ] Add lesson delete button
 
 ## Dependencies ##
 - body-parser 1.18.2
@@ -23,6 +23,8 @@ And just run `npm start ` yay! :smiley:
 - express 4.16.2
 - mongoose 5.0.2
 - wanakana 2.3.4
+- csv-parse 2.0.4
+- multer 1.3.0
 
 ## Author ##
 [Nisaruj Rattanaaram](https://github.com/nisaruj)
