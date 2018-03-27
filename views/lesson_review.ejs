@@ -23,6 +23,8 @@
                         <input ng-class="inputclass" name="answer" type="text" id='m' ng-model="answer" autofocus>
                     </div>
                     <button type="submit" class="btn btn-primary" ng-click="check()">Submit</button>
+                    <button type="submit" class="btn btn-secondary" ng-click="showans()">Show</button>
+                    <button type="submit" class="btn btn-danger" ng-click="randquiz()">Skip</button>
                 </div>
             </form>
         </div>
@@ -59,6 +61,9 @@
                 console.log("Wrong! The answer is %s",getQuiz[index].word);
             }
             $scope.answer = null;
+        };
+        $scope.showans = function() {
+            $scope.answer = getQuiz[index].word;
         };
     })
 </script>

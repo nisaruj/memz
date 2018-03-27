@@ -4,12 +4,16 @@ var server_ip_address = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
+var csv_parse = require('csv-parse');
+var fs = require('fs');
 var mongoose = require('mongoose');
 var wanakana = require('wanakana');
+var multer = require('multer');
+var mupload = multer({dest: 'tmp/'});
 
 var db_user = process.env.DB_USER || "YOUR_DATABASE_USERNAME";
 var db_pass = process.env.DB_PASS || "YOUR_DATABASE_PASSWORD";
-var connection_string = process.env.DB_STR || "YOUR_DATABASE_URI_STRING";
+var connection_string = process.env.DB_STR || "mongodb://nisaruj:6LJLbOFRQaR49nn2@memz-shard-00-00-svjat.mongodb.net:27017,memz-shard-00-01-svjat.mongodb.net:27017,memz-shard-00-02-svjat.mongodb.net:27017/test?ssl=true&replicaSet=memz-shard-0&authSource=admin";
 mongoose.connect(connection_string);
 
 var server = app.listen(server_port, function(){
@@ -72,9 +76,19 @@ app.post('/admin',function(req,res){
             });
         }
         console.log(lesson_res);
-        res.render('admin',{_lesson:lesson_res});
+        res.render('admin',{_lesson: lesson_res});
     });
 });
+
+app.post('/admin/newlesson',mupload.single('csv_upload'), function (req,res) {
+    console.log('csv uploaded : %s',req.file.path);
+    fs.readFile(req.file.path,'utf8',function(err,output) {
+        csv_parse(output, function(err,parsed_data) {
+            console.log(parsed_data);
+            res.render('new_lesson',{data: parsed_data});
+        });
+    });
+})
 
 /*app.get('/newlesson',function(req,res){
     var les = new Lesson({})

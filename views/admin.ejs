@@ -7,39 +7,46 @@
     <meta charset="utf-8" />
 </head>
 <body>
-    <h1>Admin Panel</h1>
-    <h3>List of all lessons</h3>
-    <form action="/admin" method="post">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th scope="col">Lesson Name</th>
-                    <th scope="col">Lang</th>
-                    <th scope="col">Avail</th>
-                </tr>
-            </thead>
-            <% for(var i=0; i < _lesson.length; i++) { %>
-                <tr>
-                    <td><%= _lesson[i].course %> - <%= _lesson[i].name %></td>
-                    <td>
-                        <div class="f32">
-                            <% if (_lesson[i].lang == 'jp') { %>
-                                <span class="flag jp"></span>
+    <div class="container">
+        <h1><p class="text-center">Admin Panel</p></h1>
+        <h3><p class="text-center">List of all lessons</p></h3>
+        <form action="/admin" method="post">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Lesson Name</th>
+                        <th scope="col">Lang</th>
+                        <th scope="col">Avail</th>
+                    </tr>
+                </thead>
+                <% for(var i=0; i < _lesson.length; i++) { %>
+                    <tr>
+                        <td><%= _lesson[i].course %> - <%= _lesson[i].name %></td>
+                        <td>
+                            <div class="f32">
+                                <% if (_lesson[i].lang == 'jp') { %>
+                                    <span class="flag jp"></span>
+                                <% } else { %>
+                                    <span class="flag gb"></span>
+                                <% } %>
+                            </div>
+                        </td>
+                        <td>
+                            <% if (_lesson[i].avail) { %>
+                                <input type="checkbox" class="form-check-input" name="avail[]" value=<%= i %> checked>
                             <% } else { %>
-                                <span class="flag gb"></span>
+                                <input type="checkbox" class="form-check-input" name="avail[]" value=<%= i %> >
                             <% } %>
-                        </div>
-                    </td>
-                    <td>
-                        <% if (_lesson[i].avail) { %>
-                            <input type="checkbox" class="form-check-input" name="avail[]" value=<%= i %> checked>
-                        <% } else { %>
-                            <input type="checkbox" class="form-check-input" name="avail[]" value=<%= i %> >
-                        <% } %>
-                    </td>
-                </tr>
-            <% } %>
-        </table>
-        <input class="btn btn-primary" type="submit" value="Update">
-    </form>
+                        </td>
+                    </tr>
+                <% } %>
+            </table>
+            <input class="btn btn-primary" type="submit" value="Update">
+        </form>
+        <br>
+        <form action="/admin/newlesson" enctype="multipart/form-data" method="post">
+            <input class="btn btn-primary" type="submit" value="Upload csv">
+            <input type="file" name="csv_upload">
+        </form>
+    </div>
 </body>

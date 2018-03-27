@@ -6,23 +6,25 @@
     <meta charset="utf-8" />
 </head>
 <body>
-    <h1><%= _lesson.course %></h1>
-    <h3><%= _lesson.name %></h3>
-    <a href="./<%= _lesson.lesson_id %>/review" class="btn btn-outline-info" role="button">Review</a>
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Vocab</th>
-                <th scope="col">Meaning</th>
-            </tr>
-        </thead>
-        <% for(var i=0; i < _lesson.vocab.length; i++) { %>
-            <tr>
-                <td><%= i+1 %></td>
-                <td><%= _lesson.vocab[i].word %></td>
-                <td><%= _lesson.vocab[i].meaning %></td>
-            </tr>
-        <% } %>
-    </table>
+    <div class="container">
+        <h1><p class="text-center"><%= _lesson.course %></p></h1>
+        <h3><p class="text-center"><%= _lesson.name %></p></h3>
+        <a href="./<%= _lesson.lesson_id %>/review" class="btn btn-outline-info" role="button">Review</a>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Vocab</th>
+                    <th scope="col">Meaning</th>
+                </tr>
+            </thead>
+            <% for(var i=0; i < _lesson.vocab.length; i++) { %>
+                <tr>
+                    <td><%= i+1 %></td>
+                    <td><%= _lesson.vocab[i].word %></td>
+                    <td><%= _lesson.vocab[i].meaning %></td>
+                </tr>
+            <% } %>
+        </table>
+    </div>
 </body>

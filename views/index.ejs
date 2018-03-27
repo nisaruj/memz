@@ -7,31 +7,33 @@
     <meta charset="utf-8" />
 </head>
 <body>
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <h4 class="alert-heading">Welcome to Memz!</h4>
-        <p>"Memz" is the flashcard application that help you memorize new words.<br>
-        This project is open source. Check it out on <a target="_blank" href="https://github.com/nisaruj/memz" class="alert-link">Github.</a></p>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
+    <div class="container">
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <h4 class="alert-heading">Welcome to Memz!</h4>
+            <p>"Memz" is the flashcard application that help you memorize new words.<br>
+            This project is open source. Check it out on <a target="_blank" href="https://github.com/nisaruj/memz" class="alert-link">Github.</a></p>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <h1><p class="text-center">Lesson List</p></h1>
+        <h3><p class="text-center">List of all lessons</p></h3>
+        <table class="table table-striped">
+            <% for(var i=0; i < _lesson.length; i++) { %>
+                <tr>
+                    <td><%= _lesson[i].course %> - <%= _lesson[i].name %></td>
+                    <td>
+                        <div class="f32">
+                            <% if (_lesson[i].lang == 'jp') { %>
+                                <span class="flag jp"></span>
+                            <% } else { %>
+                                <span class="flag gb"></span>
+                            <% } %>
+                        </div>
+                    </td>
+                    <td><a href="/lesson/<%= _lesson[i].lesson_id %>" class="btn btn-success" role="button">Here</a></td>
+                </tr>
+            <% } %>
+        </table>
     </div>
-    <h1>Lesson List</h1>
-    <h3>List of all lessons</h3>
-    <table class="table table-striped">
-        <% for(var i=0; i < _lesson.length; i++) { %>
-            <tr>
-                <td><%= _lesson[i].course %> - <%= _lesson[i].name %></td>
-                <td>
-                    <div class="f32">
-                        <% if (_lesson[i].lang == 'jp') { %>
-                            <span class="flag jp"></span>
-                        <% } else { %>
-                            <span class="flag gb"></span>
-                        <% } %>
-                    </div>
-                </td>
-                <td><a href="/lesson/<%= _lesson[i].lesson_id %>" class="btn btn-success" role="button">Here</a></td>
-            </tr>
-        <% } %>
-    </table>
 </body>
