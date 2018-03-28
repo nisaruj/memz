@@ -63,9 +63,6 @@ app.get('/admin',function(req,res){
 
 app.post('/admin',function(req,res){
     console.log(req.body.avail);
-    for (var i=0;i<req.body.length;i++) {
-
-    }
     const is_avail = new Set(req.body.avail.map(function(num) { return parseInt(num,10); }));
     Lesson.find({},function(err,lesson_res){
         for (var i=0;i<lesson_res.length;i++) {
