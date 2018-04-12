@@ -5,9 +5,9 @@ Flashcard web application made by Express + Mongoose + Angular.
 https://memzzz.herokuapp.com/
 
 ## Usage ##
-Change your MongoDB connection_string in index.js file.
+Change your MongoDB connection_string in config.json file.
 ```
-var connection_string = process.env.DB_STR || "YOUR_DATABASE_URI_STRING";
+connection_string: "YOUR_DATABASE_URI_STRING",
 ```
 And just run `npm start ` yay! :smiley:
 
@@ -15,6 +15,8 @@ And just run `npm start ` yay! :smiley:
 - [x] Add admin panel
 - [x] Add language icon
 - [x] Add skip button
+- [x] Add auth system
+- [ ] Add beautiful login page
 - [ ] Add lesson delete button
 
 ## Dependencies ##
@@ -25,6 +27,8 @@ And just run `npm start ` yay! :smiley:
 - wanakana 2.3.4
 - csv-parse 2.0.4
 - multer 1.3.0
+- express-session 1.15.6
+- passport-local-mongoose 5.0.0
 
 ## Author ##
 [Nisaruj Rattanaaram](https://github.com/nisaruj)
