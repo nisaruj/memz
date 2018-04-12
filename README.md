@@ -16,7 +16,8 @@ And just run `npm start ` yay! :smiley:
 - [x] Add language icon
 - [x] Add skip button
 - [x] Add auth system
-- [ ] Add beautiful login page
+- [x] Add beautiful login page
+- [ ] Add dashboard - score/streak/lang
 - [ ] Add lesson delete button
 
 ## Dependencies ##

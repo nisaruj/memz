@@ -23,6 +23,7 @@ var server = app.listen(server_port, function(){
     console.log('Listening on port %d',server_port);
 });
 
+app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
