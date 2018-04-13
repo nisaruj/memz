@@ -32,5 +32,5 @@ And just run `npm start ` yay! :smiley:
 - passport-local-mongoose 5.0.0
 
 ## Team ##
-[Nisaruj Rattanaaram](https://github.com/nisaruj)
-[Ploypiti Piyaprapan](https://github.com/ploypiti)
+- [Nisaruj Rattanaaram](https://github.com/nisaruj)
+- [Ploypiti Piyaprapan](https://github.com/ploypiti)
