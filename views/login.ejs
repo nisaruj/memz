@@ -17,6 +17,9 @@
             <input type="submit" value="Submit" class="submit">
         </form> 
         <p class="white">Not a member? <a href="/register">Sign up.</a></p>
+        <% if (massage) { %>
+            <p class="white"><%= massage %></p>
+        <% } %>
     </div>
 </body>
 </html>

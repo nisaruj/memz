@@ -31,5 +31,6 @@ And just run `npm start ` yay! :smiley:
 - express-session 1.15.6
 - passport-local-mongoose 5.0.0
 
-## Author ##
+## Team ##
 [Nisaruj Rattanaaram](https://github.com/nisaruj)
+[Ploypiti Piyaprapan](https://github.com/ploypiti)

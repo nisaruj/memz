@@ -64,11 +64,7 @@ app.get('/lesson/:lesson_id',function(req,res){
 app.get('/lesson/:lesson_id/review',function(req,res){
     Lesson.findOne({lesson_id: req.params.lesson_id},function(err,lesson_res){
         res.render('lesson_review',{user: req.user,
-            lesson_name: lesson_res.name,
-            lesson_course: lesson_res.course,
-            lid: lesson_res.id,
-            lang: lesson_res.lang,
-            quiz: lesson_res.vocab
+            _lesson: lesson_res
         });
     });
 });
@@ -171,8 +167,7 @@ app.get('/register', function(req,res) {
 app.post('/register', function(req,res) {
     var acc = new Account({ 
         username : req.body.username, 
-        firstName: req.body.firstname, 
-        lastName: req.body.lastName,
+        email: req.body.email, 
         permission: "user"});
     Account.register(acc, req.body.password, function(err, user) {
         if (err) {
@@ -186,19 +181,45 @@ app.post('/register', function(req,res) {
 
 app.get('/login', function(req,res){
     if (req.user) {
-        res.send('<pre>You have already login.</pre>');
+        res.render('login', {massage: "You have already logged in."});
     } else {
-        res.render('login');
+        res.render('login', {massage: null});
     }
 });
 
-app.post('/login', function(req,res) {
-    passport.authenticate('local')(req, res, function () {
+app.post('/login', function(req,res,next) {
+    /*passport.authenticate('local')(req, res, function () {
         res.redirect('/');
-    });
+    });*/
+    passport.authenticate('local', function(err, user, info) {
+        if (err) { 
+            return next(err);
+        }
+        if (!user) {
+            return res.render('login', {massage: "Wrong username or password."});
+        }
+        req.logIn(user, function(err) {
+            if (err) {
+                return res.render('login', {massage: "Wrong username or password."});
+            } else {
+                return res.redirect('/');
+            }
+        });
+    })(req, res, next);
 });
 
 app.get('/logout', function(req,res) {
     req.logout();
     res.redirect('/');
+});
+
+//API SERVICE //
+
+app.get('/lesson/get_qset/:lesson_id', function(req,res) {
+    Lesson.findOne({lesson_id: req.params.lesson_id},function(err,lesson_res){
+        console.log('get json');
+        res.json({user: req.user,
+            _lesson: lesson_res 
+        });
+    });
 });
