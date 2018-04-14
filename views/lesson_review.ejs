@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html ng-app="qform" ng-controller="qform-control">
+<html ng-app="qform">
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     <script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js" integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="/css/review_stylesheet.css">
     <meta charset="utf-8" />
 </head>
 <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
-
 <script src="https://unpkg.com/wanakana"></script>
 <body>
     <nav class="navbar navbar-expand-md navbar-dark bg-dark">
@@ -38,33 +38,14 @@
         <div class="card text-center">
             <h3><%= _lesson.name %></h3>
             <h4><%= _lesson.course %></h4>
-            <div class="card-header">
-            Review
-            </div>
-            <div ng-init="forminit()">
-                <form id="form">
-                    <div class="card-body w-50" style="margin: 0 auto;">
-                        <h2 class="card-title">{{curQuiz}}</h2>
-                        <div class="form-group">
-                            <input ng-class="inputclass" name="answer" type="text" id='m' ng-model="answer" autofocus>
-                        </div>
-                        <button type="submit" class="btn btn-primary" ng-click="check()">Submit</button>
-                        <button type="submit" class="btn btn-secondary" ng-click="showans()">Show</button>
-                        <button type="submit" class="btn btn-danger" ng-click="randquiz()">Skip</button>
-                    </div>
-                </form>
-            </div>
+            <div ng-view></div>
         </div>
     </div>
-    <script src="/controller/app.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
     <script src="/controller/appController.js"></script>
 </body>
 <script>
     var getLang = <%- JSON.stringify(_lesson.lang) %>;
     var getLID = <%- JSON.stringify(_lesson.lesson_id) %>;
-    const textInput = document.querySelector('#m');
-    if (getLang == 'jp') {
-        wanakana.bind(textInput);
-    }
 </script>
 </html>

@@ -1,0 +1,17 @@
+<h2>Review Result</h2>
+<br>
+<div ng-controller="result-control">
+    <table class="table">
+        <tr ng-repeat="e in _stat">
+            <td class="{{ e.is_correct ? 'table-success' : 'table-danger' }}">{{ _vocab[e.id-1].word }}</td>
+            <td class="{{ e.is_correct ? 'table-success' : 'table-danger' }}">{{ e.is_correct }}</td>
+        </tr>
+    </table>
+    <br><br>
+    <table>
+        <tr ng-repeat="quiz in _overall">
+            <td>{{ quiz.review_correct}}</td>
+            <td>{{ quiz.review_total }}</td>
+        </div>
+    </table>
+</div>

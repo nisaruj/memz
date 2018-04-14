@@ -39,6 +39,7 @@ app.set('view engine','ejs');
 
 var Lesson = require('./models/lesson');
 var Account = require('./models/account');
+var Stat = require('./models/stat');
 passport.use(new LocalStrategy(Account.authenticate()));
 passport.serializeUser(Account.serializeUser());
 passport.deserializeUser(Account.deserializeUser());
@@ -49,24 +50,102 @@ app.get('/',function(req,res){
 
 // LESSON SECTION //
 
-app.get('/lesson',function(req,res){
+app.get('/lesson', function(req,res){
     Lesson.find({avail: true},function(err,lesson_res){
         res.render('index',{user:req.user, _lesson:lesson_res});
     });
 });
 
-app.get('/lesson/:lesson_id',function(req,res){
+app.get('/lesson/:lesson_id', function(req,res){
     Lesson.findOne({lesson_id: req.params.lesson_id},function(err,lesson_res){
         res.render('lesson',{user:req.user, _lesson:lesson_res});
     });
 });
 
-app.get('/lesson/:lesson_id/review',function(req,res){
+app.get('/lesson/:lesson_id/review', function(req,res){
     Lesson.findOne({lesson_id: req.params.lesson_id},function(err,lesson_res){
         res.render('lesson_review',{user: req.user,
             _lesson: lesson_res
         });
     });
+});
+
+app.post('/lesson/:lesson_id/review', function(req,res){
+    var queryLessonAndRender = function(correct, allQuiz){
+        const correctSet = new Set(correct);
+        var stat = []
+        var overall = []
+        for (var i=0;i<allQuiz.length;i++) {
+            stat.push({id: allQuiz[i], is_correct: correctSet.has(allQuiz[i])})
+        }
+        console.log(stat);
+        return Lesson.findOne({lesson_id: req.body.lid}, function(err,lesson_res){
+            console.log(err);
+        }).then(function(lesson){
+            if (req.user) {
+                Stat.findOne({username: req.user.username, lesson_id: req.body.lid},function(err,stat_res){
+                    console.log('Result sent.');
+                    return res.json({
+                        user: req.user,
+                        _lesson: lesson,
+                        _stat: stat,
+                        _overall: stat_res.vocab_stat
+                    });
+                });
+            } else {
+                for (var i=0;i<lesson.vocab.length;i++) {
+                    overall.push({id: i+1, review_correct: correctSet.has(i+1)?1:0, review_total: 1});
+                }
+                console.log('Result sent.');
+                return res.json({
+                    user: req.user,
+                    _lesson: lesson,
+                    _stat: stat,
+                    _overall: overall
+                });
+            }  
+        }).catch(err => console.log(err));
+    };
+    if (req.user) {
+        var update_query = {}
+        var vocab_list = []
+        for (var i=0;i<req.body.id.length;i++) {
+            update_query['vocab_stat.'+req.body.id[i].toString()+'.review_correct'] = 1;
+        }
+        for (var i=0;i<req.body.qid.length;i++) {
+            update_query['vocab_stat.'+req.body.qid[i].toString()+'.review_total'] = 1;
+        }
+        var exist;
+        Stat.count({username: req.user.username, lesson_id: req.body.lid},function(err,c){
+            exist = c;
+            if (!exist) {
+                for (var i=0;i<req.body.vsize;i++) {
+                    vocab_list.push({id: i+1, review_correct: 0, review_total: 0});
+                }
+                var newstat = {
+                    username: req.user.username,
+                    lesson_id: req.body.lid,
+                    vocab_stat: vocab_list
+                };
+                newStat = new Stat(newstat);
+                newStat.save(function(err){
+                    console.log(err);
+                }).then(function(){
+                    Stat.update({username: req.user.username, lesson_id: req.body.lid}, {$inc: update_query},function(err,res){
+                        console.log('Stat updated.');
+                        queryLessonAndRender(req.body.id, req.body.qid);
+                    });
+                });
+            } else {
+                Stat.update({username: req.user.username, lesson_id: req.body.lid}, {$inc: update_query},function(err,res){
+                    console.log(err);
+                    queryLessonAndRender(req.body.id, req.body.qid);
+                });
+            }
+        });
+    } else {
+        queryLessonAndRender(req.body.id, req.body.qid);
+    }
 });
 
 // ADMIN SECTION //
@@ -216,7 +295,7 @@ app.get('/logout', function(req,res) {
 //API SERVICE //
 
 app.get('/lesson/get_qset/:lesson_id', function(req,res) {
-    Lesson.findOne({lesson_id: req.params.lesson_id},function(err,lesson_res){
+    Lesson.findOne({lesson_id: req.params.lesson_id}, {_id: false}, function(err,lesson_res){
         console.log('get json');
         res.json({user: req.user,
             _lesson: lesson_res 

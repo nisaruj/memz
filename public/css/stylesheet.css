@@ -39,6 +39,9 @@ h1,h2,h3,h4 {
 }
 
 input {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+
     border: none;
     width: 250px;
     height: 20px;
