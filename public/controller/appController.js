@@ -15,16 +15,24 @@ app.config(function($routeProvider) {
   });
 
 app.controller('qform-control', ['$scope', '$http', '$location', function($scope, $http, $location) {
-    var getQuiz, index, score, quizCount, maxQuizCount, correct_id = [], quiz_id = [];
+    var getQuiz, index, score, quizCount, maxQuizCount, correct_id = [], quiz_id = new Set();
+
+    var disableInput = function(is_disable) {
+        $scope.disableAnswer = is_disable;
+        $scope.disableSubmit = is_disable;
+        $scope.disableShow = is_disable;
+        $scope.disableSkip = is_disable;
+    }
 
     var randquiz = function() {
         console.log(score.toString() + '/' + quizCount.toString());
         if (quizCount >= maxQuizCount) {
             $scope.curQuiz = "Loading result ...";
+            disableInput(true);
             var data = {
                 lid: getLID,
                 id: correct_id,
-                qid: quiz_id,
+                qid: Array.from(quiz_id),
                 vsize: getQuiz.length
             }
             $http.post('/lesson/'+getLID.toString()+'/review/', data).then(function(msg){
@@ -34,9 +42,11 @@ app.controller('qform-control', ['$scope', '$http', '$location', function($scope
             });
             return 0;
         }
-        index = Math.floor(Math.random() * getQuiz.length);
+        do {
+            index = Math.floor(Math.random() * getQuiz.length);
+        } while(quiz_id.has(index+1));
         $scope.curQuiz = getQuiz[index].meaning;
-        quiz_id.push(index+1);
+        quiz_id.add(index+1);
         quizCount++;
         //console.log('Rand new question. : %s',getQuiz[index].meaning);
     };
@@ -49,12 +59,14 @@ app.controller('qform-control', ['$scope', '$http', '$location', function($scope
     $scope.forminit = function() {
         $scope.inputclass = "form-control";
         $scope.curQuiz = 'Loading question ...';
+        disableInput(true);
         return $http.get('/lesson/get_qset/' + getLID.toString()).then(function(response){
             getQuiz = response.data._lesson.vocab;
             score = 0;
             quizCount = 0;
             maxQuizCount = 10; // Default wordcount per review
             randquiz();
+            disableInput(false);
         });
     };
 

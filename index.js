@@ -116,11 +116,13 @@ app.post('/lesson/:lesson_id/review', function(req,res){
             update_query['vocab_stat.'+req.body.qid[i].toString()+'.review_total'] = 1;
         }
         var exist;
+        idSet = new Set(req.body.id);
+        qidSet = new Set(req.body.qid);
         Stat.count({username: req.user.username, lesson_id: req.body.lid},function(err,c){
             exist = c;
             if (!exist) {
                 for (var i=0;i<req.body.vsize;i++) {
-                    vocab_list.push({id: i+1, review_correct: 0, review_total: 0});
+                    vocab_list.push({id: i+1, review_correct: idSet.has(i+1) && qidSet.has(i+1)?1:0, review_total: qidSet.has(i+1)?1:0});
                 }
                 var newstat = {
                     username: req.user.username,
@@ -128,16 +130,12 @@ app.post('/lesson/:lesson_id/review', function(req,res){
                     vocab_stat: vocab_list
                 };
                 newStat = new Stat(newstat);
-                newStat.save(function(err){
-                    console.log(err);
-                }).then(function(){
-                    Stat.update({username: req.user.username, lesson_id: req.body.lid}, {$inc: update_query},function(err,res){
-                        console.log('Stat updated.');
-                        queryLessonAndRender(req.body.id, req.body.qid);
-                    });
+                return newStat.save().then(function() {
+                    console.log('Stat updated.');
+                    queryLessonAndRender(req.body.id, req.body.qid); 
                 });
             } else {
-                Stat.update({username: req.user.username, lesson_id: req.body.lid}, {$inc: update_query},function(err,res){
+                return Stat.update({username: req.user.username, lesson_id: req.body.lid}, {$inc: update_query},function(err,res){
                     console.log(err);
                     queryLessonAndRender(req.body.id, req.body.qid);
                 });
