@@ -14,8 +14,8 @@ body {
 .card-body {
   width: 300px !important;
   background-color: white;
-  position: fixed;
-  top: 60%;
+  position: absolute;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   -webkit-box-shadow: 0 0 7px 6px #232323;
@@ -138,9 +138,9 @@ body {
 }
 
 .title-container {
-  position: absolute;
+  position: fixed;
   z-index: 10;
-  top: 30%;
+  top: -70px;
   text-align: center;
   color: white;
   left: 50%;
