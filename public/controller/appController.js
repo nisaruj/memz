@@ -15,7 +15,7 @@ app.config(function($routeProvider) {
   });
 
 app.controller('qform-control', ['$scope', '$http', '$location', function($scope, $http, $location) {
-    var getQuiz, index, score, quizCount, maxQuizCount, correct_id = [], quiz_id = new Set();
+    var getQuiz, index, score, quizCount, maxQuizCount, correct_id = [], quiz_id = new Set(), isShowAnswer = false;
 
     var disableInput = function(is_disable) {
         $scope.disableAnswer = is_disable;
@@ -47,6 +47,7 @@ app.controller('qform-control', ['$scope', '$http', '$location', function($scope
         } while(quiz_id.has(index+1));
         $scope.curQuiz = getQuiz[index].meaning;
         quiz_id.add(index+1);
+        isShowAnswer = false;
         quizCount++;
         //console.log('Rand new question. : %s',getQuiz[index].meaning);
     };
@@ -71,7 +72,7 @@ app.controller('qform-control', ['$scope', '$http', '$location', function($scope
     };
 
     $scope.check = function() {
-        if ($scope.answer == getQuiz[index].word) {
+        if (!isShowAnswer && $scope.answer == getQuiz[index].word) {
             $scope.inputclass = "form-control is-valid";
             correct_id.push(index+1);
             score++;
@@ -84,6 +85,7 @@ app.controller('qform-control', ['$scope', '$http', '$location', function($scope
     };
 
     $scope.showans = function() {
+        isShowAnswer = true;
         $scope.inputclass = "form-control is-invalid";
         $scope.answer = getQuiz[index].word;
     };

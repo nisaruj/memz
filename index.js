@@ -140,9 +140,41 @@ app.post('/lesson/:lesson_id/review', function(req,res){
                     queryLessonAndRender(req.body.id, req.body.qid);
                 });
             }
-        });
+        })
     } else {
         queryLessonAndRender(req.body.id, req.body.qid);
+    }
+});
+
+app.get('/dashboard', function(req, res){
+    if (req.user) {
+        const min_count = 3, min_rate = 0.6;
+        return Lesson.find({}).then(function(lesson){
+            var lessonMap = {}
+            lesson.forEach(function(les){
+                lessonMap[les.lesson_id] = les;
+                //console.log(les.name);
+            });
+            return lessonMap;
+        }).then(function(lessonMap) {
+            Stat.find({username: req.user.username}, function(err, lesson_data){
+                var learnt_word_count = 0, lesson_list = [];
+                lesson_data.forEach(function(myLesson){
+                    //console.log(lessonMap[myLesson.lesson_id].name);
+                    lesson_list.push(lessonMap[myLesson.lesson_id].course + ' ' + lessonMap[myLesson.lesson_id].name);
+                    for (var i=0;i<myLesson.vocab_stat.length;i++) {
+                        if (myLesson.vocab_stat[i].review_total > min_count && 
+                            myLesson.vocab_stat[i].review_correct / myLesson.vocab_stat[i].review_total >= min_rate) {
+                                learnt_word_count++;
+                        }
+                    }
+                });
+                //console.log(lesson_list);
+                res.render('dashboard', {lesson_list: lesson_list, learnt_word_count: learnt_word_count});
+            })
+        }).catch(err => console.log(err));
+    } else {
+        res.redirect('/login');
     }
 });
 
