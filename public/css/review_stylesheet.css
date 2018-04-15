@@ -4,3 +4,125 @@ span.box {
     width: 20px;
     border: 1px solid rgb(0, 0, 0);
 }
+
+body {
+  background-color: #333;
+}
+
+.navbar-collapse .collapse .w-100 .order-3 .dual-collapse2 {
+  background-color: #FF5733 !important;
+}
+
+.card-body {
+  width: 300px !important;
+  background-color: white;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-box-shadow: 0 0 7px 6px #232323;
+    -moz-box-shadow: 0 0 7px 6px #232323;
+    box-shadow: 0 0 7px 6px #232323;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+
+.card {
+  background: none;
+  border: none;
+  color: white;
+  font-family: 'raleway';
+  padding-top: 50px;
+}
+
+.btn {
+  font-family: 'raleway';
+  font-size: 0.8em;
+  font-weight: 600;
+  border-radius: 20px;
+}
+
+.btn:focus {
+  box-shadow: none;
+}
+
+.card-title {
+  font-family: 'raleway';
+  font-size: 20px;
+  font-weight: 700;
+  color: black;
+}
+
+.form-group {
+  padding: 30px;
+}
+
+.input { color: #666;
+    position: relative;
+    display: inline-block;
+}
+.input:after {
+	position: absolute;
+    left: 50%;
+	content: '';
+	height: 40px;
+	height: 5px;
+    background: #f00;
+    transition: all 0.5s linear;
+    width: 0;
+    bottom: 0;
+}
+
+.input:hover:after {
+	width: 200px;
+  margin-left: -100px;
+}
+
+.input {
+  border: none;
+  border-bottom: solid 1px #B3B6B7
+}
+#m:focus {
+  box-shadow: none;
+  border: none !important;
+}
+
+.btn-primary {
+  background: #ff5733;
+  border: solid 2px #ff5733;
+  width: 150px;
+}
+
+.btn-primary:hover {
+  border-style: solid;
+  border-color: #ff5733;
+  border-width: 2px;
+  background: white;
+  color: #ff5733;
+}
+
+.buttons {
+  position: absolute;
+  z-index: 10;
+  top: 345%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.undertext {
+  font-size: 12px;
+}
+
+.showskip {
+  text-decoration: underline;
+}
+
+.lessoncourse {
+  font-weight: 800;
+}
+
+.lessonname {
+  font-weight: 300px;
+  font-size: 17px;
+}

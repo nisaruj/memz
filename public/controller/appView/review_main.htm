@@ -1,16 +1,17 @@
-<div class="card-header">
-    Review
-</div>
+
 <div ng-controller="qform-control" ng-init="forminit()">
     <form id="form">
         <div class="card-body w-50" style="margin: 0 auto;">
             <h2 class="card-title">{{curQuiz}}</h2>
             <div class="form-group">
-                <input ng-class="inputclass" name="answer" type="text" id='m' ng-model="answer" autofocus>
+              <div class="input">
+                <input ng-class="inputclass" name="answer" type="text" id='m' placeholder="answer here" ng-model="answer" autofocus>
+              </div>
             </div>
-            <button type="submit" class="btn btn-primary" ng-click="check()">Submit</button>
-            <button type="submit" class="btn btn-secondary" ng-click="showans()">Show</button>
-            <button type="submit" class="btn btn-danger" ng-click="skip()">Skip</button>
+        </div>
+        <div class="buttons">
+          <button type="submit" class="btn btn-primary" ng-click="check()">Submit</button>
+          <p class="undertext"><span class="showskip" ng-click="showans()">Show</span> or <span class="showskip" ng-click="skip()">Skip</span>
         </div>
     </form>
     <script>
