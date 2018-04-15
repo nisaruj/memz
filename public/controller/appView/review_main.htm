@@ -10,8 +10,8 @@
             </div>
         </div>
         <div class="buttons">
-          <button type="submit" class="btn btn-primary" ng-click="check()">Submit</button>
-          <p class="undertext"><span class="showskip" ng-click="showans()">Show</span> or <span class="showskip" ng-click="skip()">Skip</span>
+          <button type="submit" class="btn btn-primary" ng-click="check()" ng-disabled="disableSubmit">Submit</button>
+          <p class="undertext"><span class="showskip" ng-click="showans()" ng-disabled="disableShow">Show</span> or <span class="showskip" ng-click="skip()" ng-disabled="disableSkip">Skip</span>
         </div>
     </form>
     <script>

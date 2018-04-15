@@ -116,11 +116,13 @@ app.post('/lesson/:lesson_id/review', function(req,res){
             update_query['vocab_stat.'+req.body.qid[i].toString()+'.review_total'] = 1;
         }
         var exist;
+        idSet = new Set(req.body.id);
+        qidSet = new Set(req.body.qid);
         Stat.count({username: req.user.username, lesson_id: req.body.lid},function(err,c){
             exist = c;
             if (!exist) {
                 for (var i=0;i<req.body.vsize;i++) {
-                    vocab_list.push({id: i+1, review_correct: 0, review_total: 0});
+                    vocab_list.push({id: i+1, review_correct: idSet.has(i+1) && qidSet.has(i+1)?1:0, review_total: qidSet.has(i+1)?1:0});
                 }
                 var newstat = {
                     username: req.user.username,
@@ -128,23 +130,51 @@ app.post('/lesson/:lesson_id/review', function(req,res){
                     vocab_stat: vocab_list
                 };
                 newStat = new Stat(newstat);
-                newStat.save(function(err){
-                    console.log(err);
-                }).then(function(){
-                    Stat.update({username: req.user.username, lesson_id: req.body.lid}, {$inc: update_query},function(err,res){
-                        console.log('Stat updated.');
-                        queryLessonAndRender(req.body.id, req.body.qid);
-                    });
+                return newStat.save().then(function() {
+                    console.log('Stat updated.');
+                    queryLessonAndRender(req.body.id, req.body.qid); 
                 });
             } else {
-                Stat.update({username: req.user.username, lesson_id: req.body.lid}, {$inc: update_query},function(err,res){
+                return Stat.update({username: req.user.username, lesson_id: req.body.lid}, {$inc: update_query},function(err,res){
                     console.log(err);
                     queryLessonAndRender(req.body.id, req.body.qid);
                 });
             }
-        });
+        })
     } else {
         queryLessonAndRender(req.body.id, req.body.qid);
+    }
+});
+
+app.get('/dashboard', function(req, res){
+    if (req.user) {
+        const min_count = 3, min_rate = 0.6;
+        return Lesson.find({}).then(function(lesson){
+            var lessonMap = {}
+            lesson.forEach(function(les){
+                lessonMap[les.lesson_id] = les;
+                //console.log(les.name);
+            });
+            return lessonMap;
+        }).then(function(lessonMap) {
+            Stat.find({username: req.user.username}, function(err, lesson_data){
+                var learnt_word_count = 0, lesson_list = [];
+                lesson_data.forEach(function(myLesson){
+                    //console.log(lessonMap[myLesson.lesson_id].name);
+                    lesson_list.push(lessonMap[myLesson.lesson_id].course + ' ' + lessonMap[myLesson.lesson_id].name);
+                    for (var i=0;i<myLesson.vocab_stat.length;i++) {
+                        if (myLesson.vocab_stat[i].review_total > min_count && 
+                            myLesson.vocab_stat[i].review_correct / myLesson.vocab_stat[i].review_total >= min_rate) {
+                                learnt_word_count++;
+                        }
+                    }
+                });
+                //console.log(lesson_list);
+                res.render('dashboard', {lesson_list: lesson_list, learnt_word_count: learnt_word_count});
+            })
+        }).catch(err => console.log(err));
+    } else {
+        res.redirect('/login');
     }
 });
 

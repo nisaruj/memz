@@ -8,10 +8,16 @@
         </tr>
     </table>
     <br><br>
-    <table>
-        <tr ng-repeat="quiz in _overall">
+    <table class="box">
+        <tr>
+            <!--
+        <tr ng-repeat="quiz in _overall track by $index">
+            
+            <td>{{ $index }}</td>
             <td>{{ quiz.review_correct}}</td>
             <td>{{ quiz.review_total }}</td>
-        </div>
+            -->
+            <td class="box" ng-repeat="quiz in _overall track by $index" style="{{ 'background-color: rgba(0,255,0,' + quiz.review_correct/quiz.review_total +');' }}">{{ $index+1 }}</td>
+        </tr>
     </table>
 </div>

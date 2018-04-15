@@ -1,7 +1,7 @@
 {
     "server_port": 8080,
-    "using_connection_string": true,
-    "connection_string": "mongodb://nisaruj:E9f3RVgjZRh7zOt8@memz-shard-00-00-svjat.mongodb.net:27017,memz-shard-00-01-svjat.mongodb.net:27017,memz-shard-00-02-svjat.mongodb.net:27017/test?ssl=true&replicaSet=memz-shard-0&authSource=admin",
+    "using_connection_string": true, 
+    "connection_string": "YOUR_CONNECTION_URI",
     "db_user": "YOUR_DATABASE_USERNAME",
     "db_pass": "YOUR_DATABASE_PASSWORD",
     "session_secret": "keyboard cat"
