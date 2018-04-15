@@ -4,13 +4,16 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     <script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js" integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="/css/review_stylesheet.css">
+    <link rel="stylesheet" type="text/css" href="/css/main_stylesheet.css">
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:700" rel="stylesheet">
     <meta charset="utf-8" />
 </head>
 <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 <script src="https://unpkg.com/wanakana"></script>
 <body>
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark" id="navbar">
         <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
             <a class="navbar-brand" href="#">MEMZ</a>
             <ul class="navbar-nav mr-auto">
@@ -36,8 +39,8 @@
     </nav>
     <div class="container-fluid">
         <div class="card text-center">
-            <h3><%= _lesson.name %></h3>
-            <h4><%= _lesson.course %></h4>
+            <h3 class="lessonname"><%= _lesson.name %></h3>
+            <h4 class="lessoncourse"><%= _lesson.course %></h4>
             <div ng-view></div>
         </div>
     </div>
