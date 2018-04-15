@@ -1,6 +1,10 @@
 .box {
-    border: 1px solid black;
-    width: 50px;
+  border: 1px solid black;
+  width: 50px;
+}
+
+.disabled {
+  cursor: not-allowed;
 }
 
 body {
@@ -19,8 +23,8 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
   -webkit-box-shadow: 0 0 7px 6px #232323;
-    -moz-box-shadow: 0 0 7px 6px #232323;
-    box-shadow: 0 0 7px 6px #232323;
+  -moz-box-shadow: 0 0 7px 6px #232323;
+  box-shadow: 0 0 7px 6px #232323;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
@@ -57,19 +61,19 @@ body {
 }
 
 .input { color: #666;
-    position: relative;
-    display: inline-block;
+  position: relative;
+  display: inline-block;
 }
 .input:after {
 	position: absolute;
-    left: 50%;
+  left: 50%;
 	content: '';
 	height: 40px;
 	height: 5px;
-    background: #f00;
-    transition: all 0.5s linear;
-    width: 0;
-    bottom: 0;
+  background: #f00;
+  transition: all 0.5s linear;
+  width: 0;
+  bottom: 0;
 }
 
 .input:hover:after {
@@ -79,8 +83,9 @@ body {
 
 .input {
   border: none;
-  border-bottom: solid 1px #B3B6B7
+  border-bottom: solid 1px #B3B6B7;
 }
+
 #m:focus {
   box-shadow: none;
   border: none !important;
@@ -103,7 +108,7 @@ body {
 .buttons {
   position: absolute;
   z-index: 10;
-  top: 345%;
+  top: 108%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
