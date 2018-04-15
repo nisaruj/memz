@@ -42,18 +42,14 @@
             </ul>
         </div>
     </nav>
-    <div class="container-fluid">
-        <div class="card text-center">
-            <h3 class="lessonname"><%= _lesson.name %></h3>
-            <h4 class="lessoncourse"><%= _lesson.course %></h4>
-            <div ng-view></div>
-        </div>
-    </div>
+    <div ng-view></div>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
     <script src="/controller/appController.js"></script>
 </body>
 <script>
     var getLang = <%- JSON.stringify(_lesson.lang) %>;
     var getLID = <%- JSON.stringify(_lesson.lesson_id) %>;
+    var getLessonName = <%- JSON.stringify(_lesson.name) %>;
+    var getLessonCourse = <%- JSON.stringify(_lesson.course) %>;
 </script>
 </html>

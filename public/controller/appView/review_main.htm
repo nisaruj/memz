@@ -1,16 +1,19 @@
-
 <div ng-controller="qform-control" ng-init="forminit()">
+    <div class="title-container">
+        <h3 class="lessonname">{{ lesson_name }}</h3>
+        <h4 class="lessoncourse">{{ lesson_course }}</h4>
+    </div>
     <form id="form">
         <div class="card-body w-50" style="margin: 0 auto;">
             <h2 class="card-title">{{curQuiz}}</h2>
             <div class="form-group">
-              <div class="input">
-                <input ng-class="inputclass" name="answer" type="text" id='m' placeholder="answer here" ng-model="answer" autofocus>
-              </div>
+                <div class="input">
+                    <input ng-class="inputclass" name="answer" type="text" id='m' placeholder="answer here" ng-model="answer" autofocus>
+                </div>
             </div>
             <div class="buttons">
                 <button type="submit" class="btn btn-primary" ng-click="check()" ng-disabled="disableSubmit">Submit</button>
-                <p class="undertext"><span class="showskip" ng-click="showans()" ng-disabled="disableShow">Show</span> or <span class="showskip" ng-click="skip()" ng-disabled="disableSkip">Skip</span>
+                <p class="undertext"><span class="showskip" ng-click="showans()" ng-class="showbtn">Show</span> or <span class="showskip" ng-click="skip()" ng-class="skipbtn">Skip</span>
             </div>
         </div>
     </form>

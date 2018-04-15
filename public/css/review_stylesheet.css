@@ -1,10 +1,6 @@
 .box {
-  border: 1px solid black;
+  border: 1px solid rgb(255, 255, 255);
   width: 50px;
-}
-
-.disabled {
-  cursor: not-allowed;
 }
 
 body {
@@ -19,7 +15,7 @@ body {
   width: 300px !important;
   background-color: white;
   position: fixed;
-  top: 50%;
+  top: 60%;
   left: 50%;
   transform: translate(-50%, -50%);
   -webkit-box-shadow: 0 0 7px 6px #232323;
@@ -33,7 +29,6 @@ body {
 .card {
   background: none;
   border: none;
-  color: white;
   font-family: 'raleway';
   padding-top: 50px;
 }
@@ -54,16 +49,19 @@ body {
   font-size: 20px;
   font-weight: 700;
   color: black;
+  text-align: center;
 }
 
 .form-group {
   padding: 30px;
 }
 
-.input { color: #666;
+.input { 
+  color: #666;
   position: relative;
   display: inline-block;
 }
+
 .input:after {
 	position: absolute;
   left: 50%;
@@ -108,13 +106,15 @@ body {
 .buttons {
   position: absolute;
   z-index: 10;
-  top: 108%;
+  top: 110%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
 
 .undertext {
   font-size: 12px;
+  color: rgb(226, 226, 226);
+  text-align: center;
 }
 
 .showskip {
@@ -128,4 +128,27 @@ body {
 .lessonname {
   font-weight: 300px;
   font-size: 17px;
+}
+
+.showskip-disable {
+  color: rgb(49, 49, 49);
+  cursor: default;
+  pointer-events: none;
+  text-decoration: none;
+}
+
+.title-container {
+  position: absolute;
+  z-index: 10;
+  top: 30%;
+  text-align: center;
+  color: white;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+}
+
+.result {
+  color: white;
+  text-align: center;
 }

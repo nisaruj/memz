@@ -20,8 +20,8 @@ app.controller('qform-control', ['$scope', '$http', '$location', function($scope
     var disableInput = function(is_disable) {
         $scope.disableAnswer = is_disable;
         $scope.disableSubmit = is_disable;
-        $scope.disableShow = is_disable;
-        $scope.disableSkip = is_disable;
+        $scope.showbtn = is_disable ? 'showskip-disable' : 'showskip';
+        $scope.skipbtn = is_disable ? 'showskip-disable' : 'showskip';
     }
 
     var randquiz = function() {
@@ -58,6 +58,8 @@ app.controller('qform-control', ['$scope', '$http', '$location', function($scope
     };
 
     $scope.forminit = function() {
+        $scope.lesson_name = getLessonName;
+        $scope.lesson_course = getLessonCourse;
         $scope.inputclass = "form-control";
         $scope.curQuiz = 'Loading question ...';
         disableInput(true);
