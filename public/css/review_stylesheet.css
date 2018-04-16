@@ -194,12 +194,12 @@ body {
   color: black
 }
 
-a {
-  color: #FF5733;
+.hlink {
+  color: #ff5733;
   text-decoration: underline;
 }
 
-a:hover {
-  color: #FF5733;
+.hlink:hover {
+  color: #ff5733;
   text-decoration: underline;
 }
