@@ -13,6 +13,7 @@ app.controller('dashboard-control', ['$scope', function($scope){
         date = new Date(today.getFullYear(), today.getMonth(), today.getDate() - i);
 		datestr = date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
         if (learnstat[i][0] ===  datestr) streak++;
+        else if (i == 0) continue;
         else break;
     }
     $scope.streak = streak;
