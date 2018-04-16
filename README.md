@@ -1,15 +1,36 @@
 # memz
-Flashcard web application made by Express + Mongoose + Angular.
+Flashcard web application using MEAN Stack.
 
 ## Demo ##
 https://memzzz.herokuapp.com/
 
-## Usage ##
-Change your MongoDB connection_string in config.json file.
+## Getting Started ##
+
+### Prerequisites ###
+
+Before running the server, you will need MongoDB Database and Google's recaptcha secret key. You can check the links below.
+- [MongoDB Atlas](https://www.mongodb.com/cloud/atlas)
+- [reCAPTCHA](https://www.google.com/recaptcha)
+
+### Installing ###
+
+Change your MongoDB connection_string, secret key for authentication and captcha secret in config.json file (and keep them secret!).
 ```
-connection_string: "YOUR_DATABASE_URI_STRING",
+"connection_string": "YOUR_DATABASE_URI_STRING",
+...
+"session_secret": "YOUR_SESSION_SECRET",
+"captcha_secret": "YOUR_reCAPTCHA_SECRET"
 ```
-And just run `npm start ` yay! :smiley:
+Then just run `npm start ` yay! :smiley:
+<br><br>
+
+
+In case you use Heroku, add config variables in settings.
+| Config Vars  | Value |
+| ------------- | ------------- |
+| DB_STR  | database connection string  |
+| CPT_SECRET  | recaptcha secret  |
+| SESSION_SECRET | authentication secret |
 
 ## TODO ##
 - [x] Add admin panel
@@ -17,7 +38,7 @@ And just run `npm start ` yay! :smiley:
 - [x] Add skip button
 - [x] Add auth system
 - [x] Add beautiful login page
-- [ ] Add dashboard - score/streak/lang
+- [x] Add dashboard - score/streak/lang
 - [ ] Add lesson delete button
 
 ## Dependencies ##
@@ -30,6 +51,7 @@ And just run `npm start ` yay! :smiley:
 - multer 1.3.0
 - express-session 1.15.6
 - passport-local-mongoose 5.0.0
+- express-recaptcha 4.0.2
 
 ## Team ##
 - [Nisaruj Rattanaaram](https://github.com/nisaruj)
