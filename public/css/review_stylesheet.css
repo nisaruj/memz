@@ -107,8 +107,8 @@ body {
 }
 
 .input:hover:after {
-	width: 200px;
-  margin-left: -100px;
+	width: 219px;
+  margin-left: -109px;
 }
 
 .input {
@@ -183,4 +183,23 @@ body {
 .result {
   color: white;
   text-align: center;
+}
+
+.result-footer {
+  color: white;
+  font-size: 16px;
+}
+
+.black {
+  color: black
+}
+
+a {
+  color: #FF5733;
+  text-decoration: underline;
+}
+
+a:hover {
+  color: #FF5733;
+  text-decoration: underline;
 }
