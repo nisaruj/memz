@@ -61,6 +61,12 @@ app.get('/lesson', function(req,res){
     });
 });
 
+app.get('/lesson/filter/:language', function(req,res){
+    Lesson.find({avail: true, lang: req.params.language},function(err,lesson_res){
+        res.render('index',{user:req.user, _lesson:lesson_res});
+    });
+});
+
 app.get('/lesson/:lesson_id', function(req,res){
     Lesson.findOne({lesson_id: req.params.lesson_id},function(err,lesson_res){
         res.render('lesson',{user:req.user, _lesson:lesson_res});
@@ -86,11 +92,6 @@ app.post('/lesson/:lesson_id/review', function(req,res){
             stat.push({id: allQuiz[i], is_correct: correctSet.has(allQuiz[i])})
         }
         console.log(stat);
-
-        
-            
-        
-
         return Lesson.findOne({lesson_id: req.body.lid}, function(err,lesson_res){
             console.log(err);
         }).then(function(lesson){
@@ -303,6 +304,22 @@ app.post('/admin/newlesson', function(req,res) {
                 });
             }
         });
+    } else {
+        res.send('<pre>You not have permission to access.</pre>');
+    }
+});
+
+app.get('/admin/deletelesson/:lesson_id', function(req,res){
+    if (req.user && req.user.permission == 'admin') {
+        Lesson.remove({lesson_id: req.params.lesson_id}, function(err){
+            if (err) {
+                console.log('Remove error');
+            }
+            Stat.remove({lesson_id: req.params.lesson_id}, function(err){
+                console.log('Lesson and stat removed');
+                res.redirect('/admin');
+            });
+        })
     } else {
         res.send('<pre>You not have permission to access.</pre>');
     }

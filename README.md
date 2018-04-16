@@ -40,7 +40,8 @@ In case you use Heroku, add config variables in settings tab.
 - [x] Add auth system
 - [x] Add beautiful login page
 - [x] Add dashboard - score/streak/lang
-- [ ] Add lesson delete button
+- [x] Add lesson delete button
+- [x] Lang filter
 
 ## Dependencies ##
 - body-parser 1.18.2

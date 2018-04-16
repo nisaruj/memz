@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="/css/main_stylesheet.css">
     <script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js" integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+" crossorigin="anonymous"></script>
-    <link rel="stylesheet" type="text/css" href="//github.com/downloads/lafeber/world-flags-sprite/flags32.css">
+    <link rel="stylesheet" type="text/css" href="/css/flat-flags.min.css">    
     <meta charset="utf-8" />
 </head>
 <body>
@@ -57,13 +57,11 @@
                         <td><%= _lesson[i].course %> - <%= _lesson[i].name %></td>
                         <td><%= _lesson[i].lesson_id %></td>
                         <td>
-                            <div class="f32">
-                                <% if (_lesson[i].lang == 'jp') { %>
-                                    <span class="flag jp"></span>
-                                <% } else { %>
-                                    <span class="flag gb"></span>
-                                <% } %>
-                            </div>
+                            <% if (_lesson[i].lang == 'jp') { %>
+                                <i class="flag-md flag-md-JP"></i>
+                            <% } else { %>
+                                <i class="flag-md flag-md-GB"></i>
+                            <% } %>                          
                         </td>
                         <td>
                             <% if (_lesson[i].avail) { %>
@@ -71,6 +69,9 @@
                             <% } else { %>
                                 <input type="checkbox" class="form-control-input" name="avail[]" value=<%= i %> >
                             <% } %>
+                        </td>
+                        <td>
+                            <a href="/admin/deletelesson/<%= _lesson[i].lesson_id %>" class="btn btn-danger confirmation" role="button">Delete</a>
                         </td>
                     </tr>
                 <% } %>
@@ -83,5 +84,15 @@
             <input type="file" name="csv_upload">
         </form>
     </div>
+
+    <script type="text/javascript">
+        var elems = document.getElementsByClassName('confirmation');
+        var confirmIt = function (e) {
+            if (!confirm('ARE YOU SURE TO DELETE LESSON?')) e.preventDefault();
+        };
+        for (var i = 0, l = elems.length; i < l; i++) {
+            elems[i].addEventListener('click', confirmIt, false);
+        }
+    </script>
 </body>
 </html>

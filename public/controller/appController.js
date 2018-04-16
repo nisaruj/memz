@@ -26,7 +26,7 @@ app.controller('qform-control', ['$scope', '$http', '$location', function($scope
 
     var randquiz = function() {
         console.log(score.toString() + '/' + quizCount.toString());
-        if (quizCount >= maxQuizCount) {
+        if (quizCount >= getQuiz.length || quizCount >= maxQuizCount) {
             $scope.curQuiz = "Loading result ...";
             disableInput(true);
             var data = {
@@ -95,9 +95,11 @@ app.controller('qform-control', ['$scope', '$http', '$location', function($scope
 
 app.controller('result-control', ['$scope', function($scope){
     console.log(review_stat._stat);
+    console.log(review_stat._overall);
     $scope.Math = window.Math;
     $scope._stat = review_stat._stat;
     $scope._vocab = review_stat._lesson.vocab;
     $scope._overall = review_stat._overall;
+    $scope.notLoggedIn = !isLoggedIn;
 }]);
 
