@@ -1,6 +1,8 @@
 .box {
+  left: 50%;
   border: 1px solid rgb(255, 255, 255);
-  width: 50px;
+  color: black;
+  width: 1000px;
 }
 
 body {
@@ -11,9 +13,39 @@ body {
   background-color: #FF5733 !important;
 }
 
-.card-body {
+.card-body-init {
   width: 300px !important;
   background-color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-box-shadow: 0 0 7px 6px #232323;
+  -moz-box-shadow: 0 0 7px 6px #232323;
+  box-shadow: 0 0 7px 6px #232323;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+
+.card-body-correct {
+  width: 300px !important;
+  background-color: rgb(192, 255, 173);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-box-shadow: 0 0 7px 6px #232323;
+  -moz-box-shadow: 0 0 7px 6px #232323;
+  box-shadow: 0 0 7px 6px #232323;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+
+.card-body-wrong {
+  width: 300px !important;
+  background-color: rgb(255, 160, 160);
   position: absolute;
   top: 50%;
   left: 50%;

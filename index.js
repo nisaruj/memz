@@ -11,13 +11,17 @@ var LocalStrategy  = require('passport-local').Strategy;
 var wanakana = require('wanakana');
 var multer = require('multer');
 var mupload = multer({dest: 'tmp/'});
-
+var Recaptcha = require('express-recaptcha').Recaptcha;
+ 
 var server_port = process.env.PORT || appConfig.server_port;
 var session_secret = process.env.SESSION_SECRET || appConfig.session_secret;
 var db_user = process.env.DB_USER || appConfig.db_user;
 var db_pass = process.env.DB_PASS || appConfig.db_pass;
+var captcha_secret = process.env.CPT_SECRET || appConfig.captcha_secret;
 var connection_string = process.env.DB_STR || appConfig.connection_string;
 mongoose.connect(connection_string);
+
+var recaptcha = new Recaptcha('6LfBTlMUAAAAACNvLOHl-Sw0fgoro9Pf_AIVUkwq', captcha_secret);
 
 var server = app.listen(server_port, function(){
     console.log('Listening on port %d',server_port);
@@ -40,6 +44,7 @@ app.set('view engine','ejs');
 var Lesson = require('./models/lesson');
 var Account = require('./models/account');
 var Stat = require('./models/stat');
+var LearnStat = require('./models/learn_stat');
 passport.use(new LocalStrategy(Account.authenticate()));
 passport.serializeUser(Account.serializeUser());
 passport.deserializeUser(Account.deserializeUser());
@@ -71,6 +76,8 @@ app.get('/lesson/:lesson_id/review', function(req,res){
 });
 
 app.post('/lesson/:lesson_id/review', function(req,res){
+    var day_now = new Date();
+    
     var queryLessonAndRender = function(correct, allQuiz){
         const correctSet = new Set(correct);
         var stat = []
@@ -79,17 +86,33 @@ app.post('/lesson/:lesson_id/review', function(req,res){
             stat.push({id: allQuiz[i], is_correct: correctSet.has(allQuiz[i])})
         }
         console.log(stat);
+
+        
+            
+        
+
         return Lesson.findOne({lesson_id: req.body.lid}, function(err,lesson_res){
             console.log(err);
         }).then(function(lesson){
             if (req.user) {
-                Stat.findOne({username: req.user.username, lesson_id: req.body.lid},function(err,stat_res){
-                    console.log('Result sent.');
-                    return res.json({
-                        user: req.user,
-                        _lesson: lesson,
-                        _stat: stat,
-                        _overall: stat_res.vocab_stat
+                var learningData = {
+                    $set: {username: req.user.username, loginDate : day_now}, 
+                    $inc: {review_count: 1}
+                };
+                var day_start = new Date(day_now);
+                day_start.setHours(0,0,0,0);
+                var day_end = new Date(day_now);
+                day_end.setHours(23,59,59,999);
+                LearnStat.update({username: req.user.username, loginDate: {$gte: day_start, $lt: day_end}}, learningData, {upsert: true}, function(err, upres){
+                    console.log('Updated learn stat');
+                    Stat.findOne({username: req.user.username, lesson_id: req.body.lid},function(err,stat_res){
+                        console.log('Result sent.');
+                        return res.json({
+                            user: req.user,
+                            _lesson: lesson,
+                            _stat: stat,
+                            _overall: stat_res.vocab_stat
+                        });
                     });
                 });
             } else {
@@ -158,19 +181,36 @@ app.get('/dashboard', function(req, res){
             return lessonMap;
         }).then(function(lessonMap) {
             Stat.find({username: req.user.username}, function(err, lesson_data){
-                var learnt_word_count = 0, lesson_list = [];
+                var learnt_word_count = 0, lesson_list = [], lesson_learnt_word_count;
                 lesson_data.forEach(function(myLesson){
                     //console.log(lessonMap[myLesson.lesson_id].name);
-                    lesson_list.push(lessonMap[myLesson.lesson_id].course + ' ' + lessonMap[myLesson.lesson_id].name);
+                    lesson_learnt_word_count = 0;
                     for (var i=0;i<myLesson.vocab_stat.length;i++) {
                         if (myLesson.vocab_stat[i].review_total > min_count && 
                             myLesson.vocab_stat[i].review_correct / myLesson.vocab_stat[i].review_total >= min_rate) {
                                 learnt_word_count++;
+                                lesson_learnt_word_count++;
                         }
                     }
+                    lesson_list.push({
+                        fullname:lessonMap[myLesson.lesson_id].course + ' ' + lessonMap[myLesson.lesson_id].name,
+                        learnt_count: lesson_learnt_word_count,
+                        word_count: lessonMap[myLesson.lesson_id].vocab.length
+                    });
+                });
+                LearnStat.find({username: req.user.username}, function(err, learnStat){
+                    var learn_stat = [];
+                    learnStat.forEach(function(stat){
+                        learn_stat.push([stat.loginDate.getDate() + '/' + (stat.loginDate.getMonth()+1) + '/' + stat.loginDate.getFullYear(), stat.review_count]);
+                    });
+                    res.render('dashboard', {
+                        user: req.user,
+                        lesson_list: lesson_list, 
+                        learnt_word_count: learnt_word_count,
+                        learn_stat: learn_stat
+                    });
                 });
                 //console.log(lesson_list);
-                res.render('dashboard', {lesson_list: lesson_list, learnt_word_count: learnt_word_count});
             })
         }).catch(err => console.log(err));
     } else {
@@ -274,17 +314,25 @@ app.get('/register', function(req,res) {
 });
 
 app.post('/register', function(req,res) {
-    var acc = new Account({ 
-        username : req.body.username, 
-        email: req.body.email, 
-        permission: "user"});
-    Account.register(acc, req.body.password, function(err, user) {
-        if (err) {
-            return res.render('register', { user : user });
+    recaptcha.verify(req, function(error, data){
+        if(!error) {
+            //success code
+            var acc = new Account({ 
+                username : req.body.username, 
+                email: req.body.email, 
+                permission: "user"});
+            Account.register(acc, req.body.password, function(err, user) {
+                if (err) {
+                    return res.render('register', { user : user });
+                }
+                passport.authenticate('local')(req, res, function () {
+                    res.redirect('/');
+                });
+            });
+        } else {
+            //error code
+            res.send('<pre>Captcha error</pre>');
         }
-        passport.authenticate('local')(req, res, function () {
-            res.redirect('/');
-        });
     });
 })
 

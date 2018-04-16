@@ -1,14 +1,14 @@
 <div ng-controller="qform-control" ng-init="forminit()">
     <form id="form">
-        <div class="card-body w-50" style="margin: 0 auto;">
+        <div ng-class="cardclass" style="margin: 0 auto;">
             <div class="title-container">
                 <h3 class="lessonname">{{ lesson_name }}</h3>
                 <h4 class="lessoncourse">{{ lesson_course }}</h4>
             </div>
-            <h2 class="card-title">{{curQuiz}}</h2>
+            <h2 class="card-title"><br>{{curQuiz}}</h2>
             <div class="form-group">
                 <div class="input">
-                    <input ng-class="inputclass" name="answer" type="text" id='m' placeholder="answer here" ng-model="answer" autofocus>
+                    <input class="form-control" name="answer" type="text" id='m' placeholder="answer here" ng-model="answer" autofocus>
                 </div>
             </div>
             <div class="buttons">

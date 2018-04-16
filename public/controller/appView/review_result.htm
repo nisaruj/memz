@@ -5,21 +5,23 @@
         <table class="table">
             <tr ng-repeat="e in _stat">
                 <td class="{{ e.is_correct ? 'table-success' : 'table-danger' }}">{{ _vocab[e.id-1].word }}</td>
-                <td class="{{ e.is_correct ? 'table-success' : 'table-danger' }}">{{ e.is_correct }}</td>
+                <td class="{{ e.is_correct ? 'table-success' : 'table-danger' }}">{{ _vocab[e.id-1].meaning }}</td>
             </tr>
         </table>
         <br><br>
-        <table class="box">
-            <tr>
-                <!--
-            <tr ng-repeat="quiz in _overall track by $index">
-                
-                <td>{{ $index }}</td>
-                <td>{{ quiz.review_correct}}</td>
-                <td>{{ quiz.review_total }}</td>
-                -->
-                <td ng-repeat="quiz in _overall track by $index" style="{{ 'background-color: rgba(0,255,0,' + quiz.review_correct/quiz.review_total +');' }}">{{ $index+1 }}</td>
-            </tr>
-        </table>
+        <div align="center">
+            <table class="box">
+                <tr>
+                    <!--
+                <tr ng-repeat="quiz in _overall track by $index">
+                    
+                    <td>{{ $index }}</td>
+                    <td>{{ quiz.review_correct}}</td>
+                    <td>{{ quiz.review_total }}</td>
+                    -->
+                    <td ng-repeat="quiz in _overall track by $index" style="{{ 'background-color: rgb('+ Math.floor((1-quiz.review_correct/quiz.review_total) * 255) + ',255,' + Math.floor((1-quiz.review_correct/quiz.review_total) * 255).toString() +');' }}">{{ $index+1 }}</td>
+                </tr>
+            </table>
+        </div>
     </div>
 </div>

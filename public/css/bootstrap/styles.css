@@ -3,13 +3,13 @@ body {
   padding-top: 60px;
   font-size: 14px;
   color: #444444;
-  font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif; }
+  font-family: 'raleway'; }
 
 p {
   color: #777; }
 
 a, a:hover, a:focus {
-  color: #30a5ff; }
+  color: #fff; }
 
 h1, h2, h3, h4, h5, h6 {
   color: #444444; }
@@ -79,8 +79,8 @@ input.form-control {
   border: 1px solid #f9243f; }
 
 .navbar-custom {
-  background: #222;
-  height: 60px; }
+  background: #FF5733;
+  height: 55px; }
 
 .navbar-header .navbar-brand {
   color: #fff;
@@ -91,7 +91,7 @@ input.form-control {
   padding-top: 18px; }
 
 .navbar-header .navbar-brand span {
-  color: #30a5ff; }
+  color: #fff; }
 
 .navbar-toggle {
   background: rgba(255, 255, 255, 0.1);
