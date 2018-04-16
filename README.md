@@ -25,12 +25,13 @@ Then just run `npm start ` yay! :smiley:
 <br><br>
 
 
-In case you use Heroku, add config variables in settings.
-| Config Vars  | Value |
-| ------------- | ------------- |
-| DB_STR  | database connection string  |
-| CPT_SECRET  | recaptcha secret  |
-| SESSION_SECRET | authentication secret |
+In case you use Heroku, add config variables in settings tab.
+
+| Config Vars    | Value                       |
+| -------------- | --------------------------- |
+| DB_STR         | database connection string  |
+| CPT_SECRET     | recaptcha secret            |
+| SESSION_SECRET | authentication secret       |
 
 ## TODO ##
 - [x] Add admin panel
