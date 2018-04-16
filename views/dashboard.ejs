@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="dashboard" ng-controller="dashboard-control">
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,11 +22,6 @@
 	<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar-collapse"><span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
 				<a class="navbar-brand" href="#"><span>Memz</span></a>
 				<ul class="nav navbar-nav navbar-left">
 					<li><a href="/">Home</a></li>
@@ -70,7 +65,7 @@
 				<div class="col-xs-6 col-md-3 col-lg-3 no-padding">
 					<div class="panel panel-orange panel-widget border-right">
 						<div class="row no-padding"><em class="fa fa-xl fa-users color-teal"></em>
-							<div class="large">--</div>
+							<div class="large">{{ streak }}</div>
 							<div class="text-muted">Online streak</div>
 						</div>
 					</div>
@@ -116,7 +111,7 @@
 						<span class="pull-right clickable panel-toggle panel-button-tab-left"><em class="fa fa-toggle-up"></em></span></div>
 					<div class="panel-body">
 						<div class="canvas-wrapper">
-							<canvas class="main-chart" id="line-chart" height="207" width="600"></canvas>
+							<canvas class="main-chart" id="line-chart" height="{{ isMobile ? 500 : 207 }}" width="600"></canvas>
 						</div>
 					</div>
 				</div>
@@ -124,7 +119,7 @@
 			<div class="col-md-5">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						Pie Chart
+						Languages
 						<ul class="pull-right panel-settings panel-button-tab-right">
 							<li class="dropdown"><a class="pull-right dropdown-toggle" data-toggle="dropdown" href="#">
 								<em class="fa fa-cogs"></em>
@@ -220,7 +215,7 @@
 			</div>
 		</div><!--/.row-->
 	</div>	<!--/.main-->
-	
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 	<script src="js/jquery-1.11.1.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/chart.min.js"></script>
@@ -229,6 +224,8 @@
 	<script src="js/easypiechart-data.js"></script>
 	<script src="js/bootstrap-datepicker.js"></script>
 	<script src="js/custom.js"></script>
+	<script src="/controller/dashboardController.js"></script>
+
 	<script>
 		getLearnStat = <%- JSON.stringify(learn_stat) %>;
 		var today = new Date(),date;
@@ -247,10 +244,6 @@
 				last7days_data.push(0);
 			}
 		}
-		console.log(last7days);
-		console.log(getLearnStat);
-		console.log(last7days_data);
-		console.log(learnStatMap);
 		var lineChartData = {
 			labels : last7days,
 			datasets : [
@@ -266,6 +259,43 @@
 				}
 			]
 		}
+
+		getLessonList = <%- JSON.stringify(lesson_list) %>;
+		var lang, foundlang, lang_list = [];
+		var piecolor = [
+			{
+				color:"#30a5ff",
+				highlight: "#62b9fb"
+			},
+			{
+				color: "#ffb53e",
+				highlight: "#fac878"
+			},
+			{
+				color: "#1ebfae",
+				highlight: "#3cdfce"
+			},
+			{
+				color: "#f9243f",
+				highlight: "#f6495f"
+			}
+		]
+		var langMap = {'jp': 'Japanese', 'en': 'English'}
+		for (var i=0;i<getLessonList.length;i++) {
+			lang = langMap[getLessonList[i].lang]
+			foundlang = false;
+			for (var j=0;j<lang_list.length;j++) {
+				if (lang_list[j].label == lang) {
+					lang_list[j].value++;
+					foundlang = true;
+					break;
+				}
+			}
+			if (!foundlang) {
+				lang_list.push({label: lang, value: 1, color: piecolor[lang_list.length].color, highlight: piecolor[lang_list.length].highlight});
+			}
+		}
+
 		window.onload = function () {
 			var chart1 = document.getElementById("line-chart").getContext("2d");
 			window.myLine = new Chart(chart1).Line(lineChartData, {
@@ -275,7 +305,7 @@
 				scaleFontColor: "#c5c7cc"
 			});
 			var chart4 = document.getElementById("pie-chart").getContext("2d");
-				window.myPie = new Chart(chart4).Pie(pieData, {
+				window.myPie = new Chart(chart4).Pie(lang_list, {
 				responsive: true,
 				segmentShowStroke: false
 			});

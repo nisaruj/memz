@@ -193,7 +193,8 @@ app.get('/dashboard', function(req, res){
                         }
                     }
                     lesson_list.push({
-                        fullname:lessonMap[myLesson.lesson_id].course + ' ' + lessonMap[myLesson.lesson_id].name,
+                        fullname: lessonMap[myLesson.lesson_id].course + ' ' + lessonMap[myLesson.lesson_id].name,
+                        lang: lessonMap[myLesson.lesson_id].lang,
                         learnt_count: lesson_learnt_word_count,
                         word_count: lessonMap[myLesson.lesson_id].vocab.length
                     });
