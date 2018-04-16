@@ -8,7 +8,7 @@ https://memzzz.herokuapp.com/
 
 ### Prerequisites ###
 
-Before running the server, you will need MongoDB Database and Google's recaptcha secret key. You can check the links below.
+Before running the server, you will need MongoDB Database and Google's recaptcha secret key. If you don't have one, check the links below.
 - [MongoDB Atlas](https://www.mongodb.com/cloud/atlas)
 - [reCAPTCHA](https://www.google.com/recaptcha)
 
