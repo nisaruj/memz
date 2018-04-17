@@ -21,4 +21,7 @@ router.post('/newlesson', admin_controller.upload_new_lesson);
 //Delete lesson
 router.get('/deletelesson/:lesson_id', admin_controller.delete_lesson);
 
+//Get lesson csv backup
+router.get('/getlesson/:lesson_id', admin_controller.get_lesson_csv);
+
 module.exports = router;

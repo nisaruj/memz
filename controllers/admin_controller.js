@@ -106,3 +106,24 @@ exports.delete_lesson = function(req, res) {
         res.send('<pre>You not have permission to access.</pre>');
     }
 };
+
+exports.get_lesson_csv = function(req, res) {
+    if (req.user && req.user.permission == 'admin') {
+        Lesson.findOne({lesson_id: req.params.lesson_id}, function(err, lesson_res) {
+            var filename = lesson_res.course + ' ' + lesson_res.name;
+            var content = ""
+            for (var i=0;i<lesson_res.vocab.length;i++) {
+                content += lesson_res.vocab[i].word + "," + lesson_res.vocab[i].meaning + '\n';
+            }
+            fs.writeFile("./tmp/" + filename + '.csv', content, function(err) {
+                if(err) {
+                    return console.log(err);
+                }
+                console.log("The file was saved!");
+                res.download('tmp/' + filename + '.csv');
+            }); 
+        });
+    } else {
+        res.send('<pre>You not have permission to access.</pre>');
+    }
+}

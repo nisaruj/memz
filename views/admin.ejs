@@ -50,6 +50,8 @@
                         <th scope="col">LID</th>
                         <th scope="col">Lang</th>
                         <th scope="col">Avail</th>
+                        <th scope="col">Backup</th>
+                        <th scope="col">Delete</th>
                     </tr>
                 </thead>
                 <% for(var i=0; i < _lesson.length; i++) { %>
@@ -69,6 +71,9 @@
                             <% } else { %>
                                 <input type="checkbox" class="form-control-input" name="avail[]" value=<%= i %> >
                             <% } %>
+                        </td>
+                        <td>
+                            <a href="/admin/getlesson/<%= _lesson[i].lesson_id %>" class="btn btn-success" role="button">CSV</a>
                         </td>
                         <td>
                             <a href="/admin/deletelesson/<%= _lesson[i].lesson_id %>" class="btn btn-danger confirmation" role="button">Delete</a>
