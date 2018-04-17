@@ -11,12 +11,12 @@ app.controller('dashboard-control', ['$scope', function($scope){
     streak = 0;
     date = new Date(today.getFullYear(), today.getMonth(), today.getDate());
     datestr = date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
-    if (learnstat.length > 0 && learnstat[i][0] != datestr) {
+    if (learnstat.length > 0 && learnstat[0][0] != datestr) {
         ignoreToday = 1;
     }
     for (var i=0;i<learnstat.length;i++) {
         date = new Date(today.getFullYear(), today.getMonth(), today.getDate() - i - ignoreToday);
-		datestr = date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
+        datestr = date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
         if (learnstat[i][0] ===  datestr) streak++;
         else break;
     }
