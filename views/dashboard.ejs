@@ -299,13 +299,16 @@
 
 		window.onload = function () {
 			var chart1 = document.getElementById("line-chart").getContext("2d");
-			window.myLine = new Chart(chart1).Line(lineChartData, {
+			window.myLine = new Chart(chart1,{
+         type: "line",
+         data: lineChartData, 
+         options: {
 				responsive: true,
 				scaleLineColor: "rgba(0,0,0,.2)",
 				scaleGridLineColor: "rgba(0,0,0,.05)",
 				scaleFontColor: "#c5c7cc",
 				integerSteps: true
-			});
+			}});
 			var chart4 = document.getElementById("pie-chart").getContext("2d");
 				window.myPie = new Chart(chart4).Pie(lang_list, {
 				responsive: true,
