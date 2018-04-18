@@ -8,16 +8,16 @@
     <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">    
     <meta charset="utf-8" />
 </head>
-<body>
+<body class="dark">
     <div class="logincontainer" >
         <h2 class="white sign">Login</h2>
         <form action="/login" method="post">
-            <input type="text" name="username" placeholder="username" class="username">
+            <input type="text" name="username" placeholder="username" class="username input">
             <br><br>
-            <input type="password" name="password" placeholder="password" class="password">
+            <input type="password" name="password" placeholder="password" class="password input">
             <br><br><br>
-            <input type="submit" value="Submit" class="submit">
-        </form> 
+            <input type="submit" value="Submit" class="submitform">
+        </form>
         <p class="white">Not a member? <a href="/register">Sign up.</a></p>
         <% if (massage) { %>
             <p class="white"><%= massage %></p>

@@ -5,73 +5,69 @@
     <link rel="icon" href="/favicon.png" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     <script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js" integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="//github.com/downloads/lafeber/world-flags-sprite/flags32.css">
+    <link rel="stylesheet" type="text/css" href="/css/stylesheet.css">
+    <link rel="stylesheet" type="text/css" href="/css/navbar_stylesheet.css">
     <link rel="stylesheet" type="text/css" href="/css/flat-flags.min.css">
-    <link rel="stylesheet" type="text/css" href="/css/main_stylesheet.css">
     <meta charset="utf-8" />
 </head>
-<body>
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark" id="navbar">
-        <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
-            <a class="navbar-brand" href="#">MEMZ</a>
+<body class="gray">
+    <div class="navbar navbar-expand-md" id="navbar">
+        <div>
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
+                <li class="nav-item">
                     <a class="nav-link" href="/">Home</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/dashboard">Dashboard</a>
+                </li>
+                <li class="navbar-item">
+                    <a class="navbar-item nav-link" href="#"><img src="https://image.ibb.co/dXfUCS/memz_logo.png" height="40"></a>
+                </li>
                 <% if (user && user.permission == 'admin') { %>
-                    <li class="nav-item active">
+                    <li class="nav-item">
                         <a class="nav-link" href="/admin">Admin</a>
                     </li>
-                <% } %>
-                <% if (user) { %>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="/dashboard">Dashboard</a>
+                <% } else { %>
+                    <li class="nav-item">
+                    <a class="nav-link" target="_blank" href="https://github.com/nisaruj/memz">Github</a>
                     </li>
                 <% } %>
-            </ul>
-        </div>
-        <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
-            <ul class="navbar-nav ml-auto">
                 <% if (user) { %>
-                    <li class="nav-item"><a class="nav-link" href="/logout"><i class="fas fa-sign-out-alt"></i> <%= user.username %></a></li>
+                    <li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
                 <% } else { %>
-                    <li class="nav-item"><a class="nav-link" href="/login"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/login">Login</a></li>
                 <% } %>
             </ul>
         </div>
-    </nav>
-    <br>
+    </div>
+
     <div class="container">
-        <h1><p class="text-center">Lesson List</p></h1>
-        <h3><p class="text-center">List of all lessons</p></h3>
-        <span>
-            <a href="/lesson" class="btn btn-info" role="button">All</a>
-            <a href="/lesson/filter/en" class="btn btn-info" role="button">English</a>
-            <a href="/lesson/filter/jp" class="btn btn-info" role="button">Japanese</a>
-        </span>
-        <br><br>
-        <table class="table table-striped">
+        <h2 class="text-center">All lessons</h2>
+        <div class="row">
+            <div>
             <% for(var i=0; i < _lesson.length; i++) { %>
-                <tr>
-                    <td style="width: 80%"><%= _lesson[i].course %> - <%= _lesson[i].name %></td>
-                    <td style="width: 5%">
+                <div class="lesson">
+                    <div class="f32">
                         <% if (_lesson[i].lang == 'jp') { %>
-                            <i class="flag-md flag-md-JP"></i>
+                            <i class="flag-sm flag-sm-JP"></i>
                         <% } else { %>
-                            <i class="flag-md flag-md-GB"></i>
+                            <i class="flag-sm flag-sm-GB"></i>
                         <% } %>
-                    </td>
-                    <td align="right"><a href="/lesson/<%= _lesson[i].lesson_id %>" class="btn btn-success" role="button">Here</a></td>
-                </tr>
+                    </div>
+                    <p style="font-size: 1em;"><span style="font-size: 0.85em; letter-spacing: 0.9px; font-weight: 700; text-transform: uppercase;"><%= _lesson[i].course %></span><br><%= _lesson[i].name %></p>
+                    <td align="right"><a href="/lesson/<%= _lesson[i].lesson_id %>" class="btn btn-orange" role="button">Learn</a></td>
+                </div>
             <% } %>
-        </table>
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <h4 class="alert-heading">Welcome to Memz!</h4>
-            <p>"Memz" is the flashcard application that help you memorize new words.<br>
-            This project is open source. Check it out on <a target="_blank" href="https://github.com/nisaruj/memz" class="alert-link">Github.</a></p>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
         </div>
+    </div>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <h4 class="alert-heading">Welcome to Memz!</h4>
+        <p>"Memz" is the flashcard application that help you memorize new words.<br>
+        This project is open source. Check it out on <a target="_blank" href="https://github.com/nisaruj/memz" class="alert-link">Github.</a></p>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

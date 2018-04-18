@@ -1,0 +1,31 @@
+ #navbar {
+    background: none !important;
+    padding: 180px 0 0px 0;
+    margin: 0;
+    position: absolute;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+  }
+  
+  .nav-item {
+    padding: 0 30px 0 30px;
+    font-family: 'raleway';
+    text-transform: uppercase;
+    font-size: 0.6em;
+    font-weight: 700;
+    letter-spacing: 0.7px
+  }
+  
+  .nav-link {
+    color: #333 !important;
+  }
+  
+  .nav-link-white {
+    color: rgb(255, 255, 255) !important;
+  }
+  
+  .gray {
+    background-color: #efefef;
+  }

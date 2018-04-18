@@ -5,24 +5,22 @@
   width: 1000px;
 }
 
-body {
-  background-color: #333;
-}
-
 .navbar-collapse .collapse .w-100 .order-3 .dual-collapse2 {
   background-color: #FF5733 !important;
 }
 
 .card-body-init {
   width: 300px !important;
+  background: -moz-linear-gradient(top, rgba(255,255,255, 0.9) 0%, rgba(41,137,216,0) 20%, rgba(255,48,48,1) 21%, rgba(255,255,255, 0.9) 100%); /* FF3.6+ */
+  background: -webkit-linear-gradient(top, #e8e8e8 0%,#e8e8e8 30%,#fff 21%,#fff 100%); /* Chrome10+,Safari5.1+ */
   background-color: white;
   position: absolute;
-  top: 50%;
+  top: 55%;
   left: 50%;
   transform: translate(-50%, -50%);
-  -webkit-box-shadow: 0 0 7px 6px #232323;
-  -moz-box-shadow: 0 0 7px 6px #232323;
-  box-shadow: 0 0 7px 6px #232323;
+  -webkit-box-shadow: 0 0 7px 6px #dddddd;
+  -moz-box-shadow: 0 0 7px 6px #dddddd;
+  box-shadow: 0 0 7px 6px #dddddd;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
@@ -32,12 +30,12 @@ body {
   width: 300px !important;
   background-color: rgb(192, 255, 173);
   position: absolute;
-  top: 50%;
+  top: 55%;
   left: 50%;
   transform: translate(-50%, -50%);
-  -webkit-box-shadow: 0 0 7px 6px #232323;
-  -moz-box-shadow: 0 0 7px 6px #232323;
-  box-shadow: 0 0 7px 6px #232323;
+  -webkit-box-shadow: 0 0 7px 6px #74ff7d;
+  -moz-box-shadow: 0 0 7px 6px #74ff7d;
+  box-shadow: 0 0 7px 6px #74ff7d;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
@@ -47,16 +45,17 @@ body {
   width: 300px !important;
   background-color: rgb(255, 160, 160);
   position: absolute;
-  top: 50%;
+  top: 55%;
   left: 50%;
   transform: translate(-50%, -50%);
-  -webkit-box-shadow: 0 0 7px 6px #232323;
-  -moz-box-shadow: 0 0 7px 6px #232323;
-  box-shadow: 0 0 7px 6px #232323;
+  -webkit-box-shadow: 0 0 7px 6px #ff7171;
+  -moz-box-shadow: 0 0 7px 6px #ff7171;
+  box-shadow: 0 0 7px 6px #ff7171;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
 }
+
 
 .card {
   background: none;
@@ -89,16 +88,18 @@ body {
 }
 
 .input { 
+  left: 10px;
   color: #666;
   position: relative;
   display: inline-block;
+  border: none;
+  border-bottom: solid 1px #B3B6B7;
 }
 
 .input:after {
 	position: absolute;
   left: 50%;
 	content: '';
-	height: 40px;
 	height: 5px;
   background: #f00;
   transition: all 0.5s linear;
@@ -111,27 +112,22 @@ body {
   margin-left: -109px;
 }
 
-.input {
-  border: none;
-  border-bottom: solid 1px #B3B6B7;
-}
-
 #m:focus {
   box-shadow: none;
   border: none !important;
 }
 
-.btn-primary {
-  background: #ff5733;
-  border: solid 2px #ff5733;
-  width: 150px;
+.btn-orange {
+  background-color: #ff5733;
+  border: solid 3px #ff5733;
+  border-radius: 20px;
+  width: 85px;
+  color: white;
 }
 
-.btn-primary:hover {
-  border-style: solid;
-  border-color: #ff5733;
-  border-width: 2px;
-  background: white;
+.btn-orange:hover {
+  background: none;
+  border: solid 3px #ff5733;
   color: #ff5733;
 }
 
@@ -145,7 +141,7 @@ body {
 
 .undertext {
   font-size: 12px;
-  color: rgb(226, 226, 226);
+  color: #333;
   text-align: center;
 }
 
@@ -155,15 +151,17 @@ body {
 
 .lessoncourse {
   font-weight: 800;
+  color: #333;
 }
 
 .lessonname {
   font-weight: 300px;
   font-size: 17px;
+  color: #333;
 }
 
 .showskip-disable {
-  color: rgb(49, 49, 49);
+  color: rgb(255, 255, 255);
   cursor: default;
   pointer-events: none;
   text-decoration: none;
@@ -181,12 +179,13 @@ body {
 }
 
 .result {
-  color: white;
+  color: #333;
   text-align: center;
+  padding: 160px;
 }
 
 .result-footer {
-  color: white;
+  color: #333;
   font-size: 16px;
 }
 

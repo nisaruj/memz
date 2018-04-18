@@ -19,7 +19,6 @@ h1 {
   font-size: 40px; }
 
 h2 {
-  font-weight: 300;
   margin-bottom: 20px; }
 
 h3, h4 {
@@ -1044,7 +1043,7 @@ h1.page-header {
 
 .fixed-table-pagination .pagination-detail {
   margin-top: 20px; }
-  
+
 p.back-link {
   text-align: center;
   margin-bottom: 20px;
