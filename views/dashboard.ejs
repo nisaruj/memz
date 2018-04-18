@@ -296,6 +296,12 @@
 				lang_list.push({label: lang, value: 1, color: piecolor[lang_list.length].color, highlight: piecolor[lang_list.length].highlight});
 			}
 		}
+      var pielabel = [], piedata = [], piecolors = [];
+      for (var i=0;i<lang_list.length;i++) {
+           pielabel.push(lang_list[i].label)
+piedata.push(lang_list[i].value)
+piecolors.push(lang_list[i].color
+}
 
 		window.onload = function () {
 			var chart1 = document.getElementById("line-chart").getContext("2d");
@@ -310,10 +316,17 @@
 				integerSteps: true
 			}});
 			var chart4 = document.getElementById("pie-chart").getContext("2d");
-				window.myPie = new Chart(chart4).Pie(lang_list, {
+				window.myPie = new Chart(chart4, {
+          type: "pie",
+          data: {
+              label: pielabel,
+              backgroundColor: piecolors,
+              data: piedata
+          }, 
+          options: {
 				responsive: true,
 				segmentShowStroke: false
-			});
+			}});
 		};
 	</script>	
 </body>
