@@ -319,10 +319,12 @@ piecolors.push(lang_list[i].color
 				window.myPie = new Chart(chart4, {
           type: "pie",
           data: {
-              label: pielabel,
-              backgroundColor: piecolors,
-              data: piedata
-          }, 
+              labels: pielabel,
+              datasets: [{
+                  label: "Language",
+                  backgroundColor: piecolors,
+                  data: piedata
+          }]}, 
           options: {
 				responsive: true,
 				segmentShowStroke: false
