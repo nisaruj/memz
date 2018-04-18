@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     <script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js" integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="/css/review_stylesheet.css">
-    <link rel="stylesheet" type="text/css" href="/css/main_stylesheet.css">
+    <link rel="stylesheet" type="text/css" href="/css/stylesheet.css">
     <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Raleway:700" rel="stylesheet">
     <meta charset="utf-8" />
@@ -13,39 +13,45 @@
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 <script src="https://unpkg.com/wanakana"></script>
 <body>
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark" id="navbar">
-        <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
-            <a class="navbar-brand" href="#">MEMZ</a>
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="/">Home</a>
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark" id="navbar">
+      <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+          <ul class="navbar-nav mr-auto">
+              <li class="nav-item active">
+                  <a class="nav-link" href="/">Home</a>
+              </li>
+              <% if (user) { %>
+                  <li class="nav-item active">
+                      <a class="nav-link" href="/dashboard">Dashboard</a>
+                  </li>
+              <% } else { %>
+                  <li class="nav-item active">
+                        <a class="nav-link" href="/login">Dashboard</a>
+                  </li>
+              <% } %>
+              <li class="navbar-item">
+                  <a class="navbar-item nav-link" href="#"><img src="https://image.ibb.co/dXfUCS/memz_logo.png" height="40"></a>
                 </li>
-                <% if (user && user.permission == 'admin') { %>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="/admin">Admin</a>
-                    </li>
-                <% } %>
-                <% if (user) { %>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="/dashboard">Dashboard</a>
-                    </li>
-                <% } %>
-            </ul>
-        </div>
-        <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
-            <ul class="navbar-nav ml-auto">
-                <% if (user) { %>
-                    <li class="nav-item"><a class="nav-link" href="/logout"><i class="fas fa-sign-out-alt"></i> <%= user.username %></a></li>
-                <% } else { %>
-                    <li class="nav-item"><a class="nav-link" href="/login"><i class="fas fa-sign-in-alt"></i> Login</a></li>
-                <% } %>
-            </ul>
-        </div>
-    </nav>
+              <% if (user && user.permission == 'admin') { %>
+                  <li class="nav-item active">
+                      <a class="nav-link" href="/admin">Admin</a>
+                  </li>
+              <% } else { %>
+                <li class="nav-item active">
+                    <a class="nav-link" href="https://github.com/nisaruj/memz">Github</a>
+                </li>
+              <% } %>
+              <% if (user) { %>
+                  <li class="nav-item active"><a class="nav-link" href="/logout">Logout</a></li>
+              <% } else { %>
+                  <li class="nav-item active"><a class="nav-link" href="/login">Login</a></li>
+              <% } %>
+          </ul>
+      </div>
+  </nav>
     <div class="container-fluid">
-        <div class="card text-center">
-            <h3 class="lessonname"><%= _lesson.name %></h3>
-            <h4 class="lessoncourse"><%= _lesson.course %></h4>
+        <div class="card text-cente">
+            <h2 class="lessonname"><%= _lesson.name %></h2>
+            <h3 class="lessoncourse"><%= _lesson.course %></h3>
             <div ng-view></div>
         </div>
     </div>

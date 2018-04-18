@@ -17,7 +17,8 @@ body {
 
 .card-body {
   width: 300px !important;
-  background-color: white;
+  background: -moz-linear-gradient(top, rgba(255,255,255, 0.9) 0%, rgba(41,137,216,0) 20%, rgba(255,48,48,1) 21%, rgba(255,255,255, 0.9) 100%); /* FF3.6+ */
+  background: -webkit-linear-gradient(top, #e8e8e8 0%,#e8e8e8 30%,#fff 21%,#fff 100%); /* Chrome10+,Safari5.1+ */
   position: fixed;
   top: 50%;
   left: 50%;
@@ -29,6 +30,7 @@ body {
   -moz-border-radius: 5px;
   border-radius: 5px;
 }
+
 
 .card {
   background: none;
@@ -123,9 +125,4 @@ body {
 
 .lessoncourse {
   font-weight: 800;
-}
-
-.lessonname {
-  font-weight: 300px;
-  font-size: 17px;
 }
