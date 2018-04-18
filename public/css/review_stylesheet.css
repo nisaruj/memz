@@ -1,10 +1,8 @@
 .box {
-  border: 1px solid black;
-  width: 50px;
-}
-
-.disabled {
-  cursor: not-allowed;
+  left: 50%;
+  border: 1px solid rgb(255, 255, 255);
+  color: black;
+  width: 1000px;
 }
 
 body {
@@ -15,11 +13,43 @@ body {
   background-color: #FF5733 !important;
 }
 
-.card-body {
+.card-body-init {
   width: 300px !important;
   background: -moz-linear-gradient(top, rgba(255,255,255, 0.9) 0%, rgba(41,137,216,0) 20%, rgba(255,48,48,1) 21%, rgba(255,255,255, 0.9) 100%); /* FF3.6+ */
   background: -webkit-linear-gradient(top, #e8e8e8 0%,#e8e8e8 30%,#fff 21%,#fff 100%); /* Chrome10+,Safari5.1+ */
   position: fixed;
+  background-color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-box-shadow: 0 0 7px 6px #232323;
+  -moz-box-shadow: 0 0 7px 6px #232323;
+  box-shadow: 0 0 7px 6px #232323;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+
+.card-body-correct {
+  width: 300px !important;
+  background-color: rgb(192, 255, 173);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-box-shadow: 0 0 7px 6px #232323;
+  -moz-box-shadow: 0 0 7px 6px #232323;
+  box-shadow: 0 0 7px 6px #232323;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+
+.card-body-wrong {
+  width: 300px !important;
+  background-color: rgb(255, 160, 160);
+  position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -35,7 +65,6 @@ body {
 .card {
   background: none;
   border: none;
-  color: white;
   font-family: 'raleway';
   padding-top: 50px;
 }
@@ -56,16 +85,19 @@ body {
   font-size: 20px;
   font-weight: 700;
   color: black;
+  text-align: center;
 }
 
 .form-group {
   padding: 30px;
 }
 
-.input { color: #666;
+.input { 
+  color: #666;
   position: relative;
   display: inline-block;
 }
+
 .input:after {
 	position: absolute;
   left: 50%;
@@ -79,8 +111,8 @@ body {
 }
 
 .input:hover:after {
-	width: 200px;
-  margin-left: -100px;
+	width: 219px;
+  margin-left: -109px;
 }
 
 .input {
@@ -110,13 +142,15 @@ body {
 .buttons {
   position: absolute;
   z-index: 10;
-  top: 108%;
+  top: 110%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
 
 .undertext {
   font-size: 12px;
+  color: rgb(226, 226, 226);
+  text-align: center;
 }
 
 .showskip {
@@ -125,4 +159,51 @@ body {
 
 .lessoncourse {
   font-weight: 800;
+}
+
+.lessonname {
+  font-weight: 300px;
+  font-size: 17px;
+}
+
+.showskip-disable {
+  color: rgb(49, 49, 49);
+  cursor: default;
+  pointer-events: none;
+  text-decoration: none;
+}
+
+.title-container {
+  position: fixed;
+  z-index: 10;
+  top: -70px;
+  text-align: center;
+  color: white;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+}
+
+.result {
+  color: white;
+  text-align: center;
+}
+
+.result-footer {
+  color: white;
+  font-size: 16px;
+}
+
+.black {
+  color: black
+}
+
+.hlink {
+  color: #ff5733;
+  text-decoration: underline;
+}
+
+.hlink:hover {
+  color: #ff5733;
+  text-decoration: underline;
 }

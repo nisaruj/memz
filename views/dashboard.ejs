@@ -1,13 +1,16 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="dashboard" ng-controller="dashboard-control">
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Dashboard</title>
+	<title>MEMZ</title>
+	<link rel="icon" href="/favicon.png" />
 	<link href="css/bootstrap/bootstrap.min.css" rel="stylesheet">
 	<script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js" integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+" crossorigin="anonymous"></script>
 	<link href="css/bootstrap/datepicker3.css" rel="stylesheet">
 	<link href="css/bootstrap/styles.css" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:700" rel="stylesheet">
 	
 	<!--Custom Font-->
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
@@ -20,12 +23,15 @@
 	<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar-collapse"><span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span></button>
 				<a class="navbar-brand" href="#"><span>Memz</span></a>
-				<ul class="nav navbar-top-links navbar-right">
+				<ul class="nav navbar-nav navbar-left">
+					<li><a href="/">Home</a></li>
+					<% if (user && user.permission == 'admin') { %>
+						<li><a href="/admin">Admin</a></li>
+					<% } %>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="/logout"><i class="fas fa-sign-out-alt"></i> <%= user.username %></a></li>
 				</ul>
 			</div>
 		</div><!-- /.container-fluid -->
@@ -45,7 +51,7 @@
 					<div class="panel panel-teal panel-widget border-right">
 						<div class="row no-padding"><em class="fa fa-xl fa-book color-blue"></em>
 							<div class="large"><%= lesson_list.length %></div>
-							<div class="text-muted">Lesson learnt</div>
+							<div class="text-muted">Lesson learning</div>
 						</div>
 					</div>
 				</div>
@@ -60,7 +66,7 @@
 				<div class="col-xs-6 col-md-3 col-lg-3 no-padding">
 					<div class="panel panel-orange panel-widget border-right">
 						<div class="row no-padding"><em class="fa fa-xl fa-users color-teal"></em>
-							<div class="large">--</div>
+							<div class="large">{{ streak }}</div>
 							<div class="text-muted">Online streak</div>
 						</div>
 					</div>
@@ -79,7 +85,7 @@
 			<div class="col-md-7">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						Site Traffic Overview
+						Review Overview
 						<ul class="pull-right panel-settings panel-button-tab-right">
 							<li class="dropdown"><a class="pull-right dropdown-toggle" data-toggle="dropdown" href="#">
 								<em class="fa fa-cogs"></em>
@@ -106,7 +112,7 @@
 						<span class="pull-right clickable panel-toggle panel-button-tab-left"><em class="fa fa-toggle-up"></em></span></div>
 					<div class="panel-body">
 						<div class="canvas-wrapper">
-							<canvas class="main-chart" id="line-chart" height="207" width="600"></canvas>
+							<canvas class="main-chart" id="line-chart" height="{{ isMobile ? 500 : 207 }}" width="600"></canvas>
 						</div>
 					</div>
 				</div>
@@ -114,7 +120,7 @@
 			<div class="col-md-5">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						Pie Chart
+						Languages
 						<ul class="pull-right panel-settings panel-button-tab-right">
 							<li class="dropdown"><a class="pull-right dropdown-toggle" data-toggle="dropdown" href="#">
 								<em class="fa fa-cogs"></em>
@@ -154,8 +160,8 @@
 					<div class="col-xs-6 col-md-3">
 						<div class="panel panel-default">
 							<div class="panel-body easypiechart-panel">
-								<h4><%= lesson_list[i] %></h4>
-								<% pvalue = Math.floor(Math.random() * 100); %>
+								<h4><%= lesson_list[i].fullname %></h4>
+								<% pvalue = Math.floor(lesson_list[i].learnt_count / lesson_list[i].word_count * 100)%>
 								<div class="easypiechart" id="<%= 'easypiechart-' + piecolor[i] %>" data-percent="<%= pvalue %>" ><span class="percent"><%= pvalue %>%</span></div>
 							</div>
 						</div>
@@ -210,29 +216,119 @@
 			</div>
 		</div><!--/.row-->
 	</div>	<!--/.main-->
-	
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 	<script src="js/jquery-1.11.1.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
-	<script src="js/chart.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
 	<script src="js/chart-data.js"></script>
 	<script src="js/easypiechart.js"></script>
 	<script src="js/easypiechart-data.js"></script>
 	<script src="js/bootstrap-datepicker.js"></script>
 	<script src="js/custom.js"></script>
+	<script src="/controller/dashboardController.js"></script>
+
 	<script>
+		getLearnStat = <%- JSON.stringify(learn_stat) %>;
+		var today = new Date(),date;
+		last7days = [], last7days_data = [], learnStatMap = {};
+		for (var i=0;i<getLearnStat.length;i++) {
+			learnStatMap[getLearnStat[i][0]] = getLearnStat[i][1];
+		}
+		for (var i=6;i>=0;i--) {
+			date = new Date(today.getFullYear(), today.getMonth(), today.getDate() - i);
+			datestr = date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
+			last7days.push(datestr);
+			if(learnStatMap.hasOwnProperty(datestr)) {
+				last7days_data.push(learnStatMap[datestr]);
+			}
+			else {
+				last7days_data.push(0);
+			}
+		}
+		var lineChartData = {
+			labels : last7days,
+			datasets : [
+				{
+					label: "Review count",
+					fillColor : "rgba(220,220,220,0.2)",
+					strokeColor : "rgba(220,220,220,1)",
+					pointColor : "rgba(220,220,220,1)",
+					pointStrokeColor : "#fff",
+					pointHighlightFill : "#fff",
+					pointHighlightStroke : "rgba(220,220,220,1)",
+					data : last7days_data
+				}
+			]
+		}
+
+		getLessonList = <%- JSON.stringify(lesson_list) %>;
+		var lang, foundlang, lang_list = [];
+		var piecolor = [
+			{
+				color:"#30a5ff",
+				highlight: "#62b9fb"
+			},
+			{
+				color: "#ffb53e",
+				highlight: "#fac878"
+			},
+			{
+				color: "#1ebfae",
+				highlight: "#3cdfce"
+			},
+			{
+				color: "#f9243f",
+				highlight: "#f6495f"
+			}
+		]
+		var langMap = {'jp': 'Japanese', 'en': 'English'}
+		for (var i=0;i<getLessonList.length;i++) {
+			lang = langMap[getLessonList[i].lang]
+			foundlang = false;
+			for (var j=0;j<lang_list.length;j++) {
+				if (lang_list[j].label == lang) {
+					lang_list[j].value++;
+					foundlang = true;
+					break;
+				}
+			}
+			if (!foundlang) {
+				lang_list.push({label: lang, value: 1, color: piecolor[lang_list.length].color, highlight: piecolor[lang_list.length].highlight});
+			}
+		}
+      var pielabel = [], piedata = [], piecolors = [];
+      for (var i=0;i<lang_list.length;i++) {
+           pielabel.push(lang_list[i].label)
+piedata.push(lang_list[i].value)
+piecolors.push(lang_list[i].color)
+}
+
 		window.onload = function () {
 			var chart1 = document.getElementById("line-chart").getContext("2d");
-			window.myLine = new Chart(chart1).Line(lineChartData, {
+			window.myLine = new Chart(chart1,{
+         type: "line",
+         data: lineChartData, 
+         options: {
 				responsive: true,
 				scaleLineColor: "rgba(0,0,0,.2)",
 				scaleGridLineColor: "rgba(0,0,0,.05)",
-				scaleFontColor: "#c5c7cc"
-			});
+				scaleFontColor: "#c5c7cc",
+				integerSteps: true
+			}});
 			var chart4 = document.getElementById("pie-chart").getContext("2d");
-				window.myPie = new Chart(chart4).Pie(pieData, {
+				window.myPie = new Chart(chart4, {
+          type: "pie",
+          data: {
+              labels: pielabel,
+              datasets: [{
+                  label: "Language",
+                  backgroundColor: piecolors,
+                  data: piedata
+          }]}, 
+          options: {
 				responsive: true,
 				segmentShowStroke: false
-			});
+			}});
 		};
 	</script>	
 </body>

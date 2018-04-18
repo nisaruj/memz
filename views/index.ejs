@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <title>MEMZ</title>
+    <link rel="icon" href="/favicon.png" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     <script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js" integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="//github.com/downloads/lafeber/world-flags-sprite/flags32.css">
     <link rel="stylesheet" type="text/css" href="/css/stylesheet.css">
+    <link rel="stylesheet" type="text/css" href="/css/flat-flags.min.css">
     <meta charset="utf-8" />
 </head>
 <body class="gray">
@@ -60,6 +63,42 @@
                     <p style="font-size: 1em;"><span style="font-size: 0.85em; letter-spacing: 0.9px; font-weight: 700; text-transform: uppercase;"><%= _lesson[i].course %></span><br><%= _lesson[i].name %></p>
                     <td align="right"><a href="/lesson/<%= _lesson[i].lesson_id %>" class="btn btn-success" role="button">Learn</a></td>
                 </div>
+                <% } %>
+            </ul>
+        </div>
+        <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+            <ul class="navbar-nav ml-auto">
+                <% if (user) { %>
+                    <li class="nav-item"><a class="nav-link" href="/logout"><i class="fas fa-sign-out-alt"></i> <%= user.username %></a></li>
+                <% } else { %>
+                    <li class="nav-item"><a class="nav-link" href="/login"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+                <% } %>
+            </ul>
+        </div>
+    </nav>
+    <br>
+    <div class="container">
+        <h1><p class="text-center">Lesson List</p></h1>
+        <h3><p class="text-center">List of all lessons</p></h3>
+        <span>
+            <a href="/lesson" class="btn btn-info" role="button">All</a>
+            <a href="/lesson/filter/en" class="btn btn-info" role="button">English</a>
+            <a href="/lesson/filter/jp" class="btn btn-info" role="button">Japanese</a>
+        </span>
+        <br><br>
+        <table class="table table-striped">
+            <% for(var i=0; i < _lesson.length; i++) { %>
+                <tr>
+                    <td style="width: 80%"><%= _lesson[i].course %> - <%= _lesson[i].name %></td>
+                    <td style="width: 5%">
+                        <% if (_lesson[i].lang == 'jp') { %>
+                            <i class="flag-md flag-md-JP"></i>
+                        <% } else { %>
+                            <i class="flag-md flag-md-GB"></i>
+                        <% } %>
+                    </td>
+                    <td align="right"><a href="/lesson/<%= _lesson[i].lesson_id %>" class="btn btn-success" role="button">Here</a></td>
+                </tr>
             <% } %>
         </div>
             </div>

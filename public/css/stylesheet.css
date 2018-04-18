@@ -24,7 +24,7 @@ h1,h2,h3,h4 {
 }
 
 .sign {
-    padding-bottom: 35px;;
+    padding-bottom: 35px;
 }
 
 .logincontainer {
@@ -46,7 +46,7 @@ input {
     -moz-appearance: none;
 
     border: none;
-    width: 250px;
+    width: 272px;
     height: 20px;
     color: #fff;
     border-radius: 3%;
@@ -59,7 +59,7 @@ input.submit {
     font-size: 0.8em;
     background-color: #FF5733;
     height: 40px;
-    width: 280px;
+    width: 303px;
 }
 
 input.submit:hover {
@@ -147,4 +147,8 @@ h2, h2.text-center, h2.lessonname {
 
 .f32 {
   padding-bottom: 15px;
+
+.g-recaptcha {
+    width:240px;
+    height:74px;
 }

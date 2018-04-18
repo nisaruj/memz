@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html ng-app="qform">
 <head>
+    <title>MEMZ</title>
+    <link rel="icon" href="/favicon.png" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     <script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js" integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="/css/review_stylesheet.css">
@@ -11,7 +13,7 @@
 </head>
 <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
-<script src="https://unpkg.com/wanakana"></script>
+<script src="/js/wanakana.js"></script>
 <body>
   <nav class="navbar navbar-expand-md navbar-dark bg-dark" id="navbar">
       <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
@@ -55,11 +57,37 @@
             <div ng-view></div>
         </div>
     </div>
+                <% if (user && user.permission == 'admin') { %>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/admin">Admin</a>
+                    </li>
+                <% } %>
+                <% if (user) { %>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/dashboard">Dashboard</a>
+                    </li>
+                <% } %>
+            </ul>
+        </div>
+        <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+            <ul class="navbar-nav ml-auto">
+                <% if (user) { %>
+                    <li class="nav-item"><a class="nav-link" href="/logout"><i class="fas fa-sign-out-alt"></i> <%= user.username %></a></li>
+                <% } else { %>
+                    <li class="nav-item"><a class="nav-link" href="/login"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+                <% } %>
+            </ul>
+        </div>
+    </nav>
+    <div ng-view></div>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
     <script src="/controller/appController.js"></script>
 </body>
 <script>
     var getLang = <%- JSON.stringify(_lesson.lang) %>;
     var getLID = <%- JSON.stringify(_lesson.lesson_id) %>;
+    var getLessonName = <%- JSON.stringify(_lesson.name) %>;
+    var getLessonCourse = <%- JSON.stringify(_lesson.course) %>;
+    var isLoggedIn = <%- user != null %>;
 </script>
 </html>

@@ -20,13 +20,13 @@ app.controller('qform-control', ['$scope', '$http', '$location', function($scope
     var disableInput = function(is_disable) {
         $scope.disableAnswer = is_disable;
         $scope.disableSubmit = is_disable;
-        $scope.disableShow = is_disable;
-        $scope.disableSkip = is_disable;
+        $scope.showbtn = is_disable ? 'showskip-disable' : 'showskip';
+        $scope.skipbtn = is_disable ? 'showskip-disable' : 'showskip';
     }
 
     var randquiz = function() {
         console.log(score.toString() + '/' + quizCount.toString());
-        if (quizCount >= maxQuizCount) {
+        if (quizCount >= getQuiz.length || quizCount >= maxQuizCount) {
             $scope.curQuiz = "Loading result ...";
             disableInput(true);
             var data = {
@@ -53,12 +53,14 @@ app.controller('qform-control', ['$scope', '$http', '$location', function($scope
     };
 
     $scope.skip = function() {
-        $scope.inputclass = "form-control is-invalid";
+        $scope.cardclass = 'card-body-wrong w-50';
         randquiz();
     };
 
     $scope.forminit = function() {
-        $scope.inputclass = "form-control";
+        $scope.lesson_name = getLessonName;
+        $scope.lesson_course = getLessonCourse;
+        $scope.cardclass = 'card-body-init w-50';
         $scope.curQuiz = 'Loading question ...';
         disableInput(true);
         return $http.get('/lesson/get_qset/' + getLID.toString()).then(function(response){
@@ -73,11 +75,11 @@ app.controller('qform-control', ['$scope', '$http', '$location', function($scope
 
     $scope.check = function() {
         if (!isShowAnswer && $scope.answer == getQuiz[index].word) {
-            $scope.inputclass = "form-control is-valid";
+            $scope.cardclass = 'card-body-correct w-50';
             correct_id.push(index+1);
             score++;
         } else {
-            $scope.inputclass = "form-control is-invalid";
+            $scope.cardclass = 'card-body-wrong w-50';
             //console.log("Wrong! The answer is %s",getQuiz[index].word);
         }
         $scope.answer = null;
@@ -86,15 +88,18 @@ app.controller('qform-control', ['$scope', '$http', '$location', function($scope
 
     $scope.showans = function() {
         isShowAnswer = true;
-        $scope.inputclass = "form-control is-invalid";
+        $scope.cardclass = 'card-body-wrong w-50';
         $scope.answer = getQuiz[index].word;
     };
 }]);
 
 app.controller('result-control', ['$scope', function($scope){
     console.log(review_stat._stat);
+    console.log(review_stat._overall);
+    $scope.Math = window.Math;
     $scope._stat = review_stat._stat;
     $scope._vocab = review_stat._lesson.vocab;
     $scope._overall = review_stat._overall;
+    $scope.notLoggedIn = !isLoggedIn;
 }]);
 

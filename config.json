@@ -1,8 +1,9 @@
 {
     "server_port": 8080,
-    "using_connection_string": true,
-    "connection_string": "",
-    "db_user": "",
-    "db_pass": "",
-    "session_secret": "keyboard cat"
+    "using_connection_string": true, 
+    "connection_string": "YOUR_CONNECTION_URI",
+    "db_user": "YOUR_DATABASE_USERNAME",
+    "db_pass": "YOUR_DATABASE_PASSWORD",
+    "session_secret": "keyboard cat",
+    "captcha_secret": "YOUR_CAPTCHA_SECRET"
 }
