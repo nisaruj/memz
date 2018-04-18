@@ -1,6 +1,7 @@
 var Lesson = require('../models/lesson');
 var Stat = require('../models/stat');
 var LearnStat = require('../models/learn_stat');
+var Profile = require('../models/profile');
 
 exports.get_lesson_list = function(req, res) {
     Lesson.find({avail: true}, function(err,lesson_res) {
@@ -36,7 +37,7 @@ exports.receive_review_result = function(req, res) {
         var stat = []
         var overall = []
         for (var i=0;i<allQuiz.length;i++) {
-            stat.push({id: allQuiz[i], is_correct: correctSet.has(allQuiz[i])})
+            stat.push({id: allQuiz[i], is_correct: correctSet.has(allQuiz[i])});
         }
         console.log(stat);
         return Lesson.findOne({lesson_id: req.body.lid}, function(err,lesson_res){
@@ -54,12 +55,24 @@ exports.receive_review_result = function(req, res) {
                 LearnStat.update({username: req.user.username, loginDate: {$gte: day_start, $lt: day_end}}, learningData, {upsert: true}, function(err, upres){
                     console.log('Updated learn stat');
                     Stat.findOne({username: req.user.username, lesson_id: req.body.lid},function(err,stat_res){
-                        console.log('Result sent.');
-                        return res.json({
-                            user: req.user,
-                            _lesson: lesson,
-                            _stat: stat,
-                            _overall: stat_res.vocab_stat
+                        var score = 0;
+                        //console.log(stat_res);
+                        for (var i=0;i<stat.length;i++) {
+                            //console.log(stat_res.vocab_stat[stat[i].id-1].review_correct/stat_res.vocab_stat[stat[i].id-1].review_total);
+                            if (!stat[i].is_correct) continue;
+                            if (stat_res.vocab_stat[stat[i].id-1].review_total == 0) score += 100;
+                            //console.log(Math.floor(stat_res.vocab_stat[stat[i].id-1].review_correct/stat_res.vocab_stat[stat[i].id-1].review_total*100));
+                            else score+=Math.floor((1-stat_res.vocab_stat[stat[i].id-1].review_correct/stat_res.vocab_stat[stat[i].id-1].review_total)*100);
+                        }
+                        console.log('Score:',score);
+                        Profile.update({username: req.user.username}, {$inc: {score: score}}, function(err){
+                            console.log('Result sent.');
+                            return res.json({
+                                user: req.user,
+                                _lesson: lesson,
+                                _stat: stat,
+                                _overall: stat_res.vocab_stat
+                            });
                         });
                     });
                 });

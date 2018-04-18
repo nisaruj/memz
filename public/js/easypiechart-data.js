@@ -25,3 +25,18 @@ $(function() {
        barColor: '#30a5ff'
    });
 });
+
+$(function() {
+    $('.easypiechart-default-sm').easyPieChart({
+        scaleColor: false,
+        barColor: '#ff5733',
+        size: 30
+    });
+ });
+
+ $(function() {
+    $('.easypiechart-default-md').easyPieChart({
+        scaleColor: false,
+        barColor: '#ff5733',
+    });
+ });

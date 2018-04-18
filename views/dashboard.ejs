@@ -8,7 +8,8 @@
 	<link href="css/bootstrap/bootstrap.min.css" rel="stylesheet">
 	<script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js" integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+" crossorigin="anonymous"></script>
 	<link href="css/bootstrap/datepicker3.css" rel="stylesheet">
-	<link href="css/bootstrap/styles.css" rel="stylesheet">
+	<link href="css/bootstrap/dashboardstyles.css" rel="stylesheet">
+	<link href="css/flat-flags.min.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Raleway:700" rel="stylesheet">
 	
@@ -74,8 +75,8 @@
 				<div class="col-xs-6 col-md-3 col-lg-3 no-padding">
 					<div class="panel panel-red panel-widget ">
 						<div class="row no-padding"><em class="fa fa-xl fa-search color-red"></em>
-							<div class="large">--</div>
-							<div class="text-muted">???</div>
+							<div class="large"><%= profile.score %></div>
+							<div class="text-muted">Score</div>
 						</div>
 					</div>
 				</div>
@@ -86,30 +87,7 @@
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						Review Overview
-						<ul class="pull-right panel-settings panel-button-tab-right">
-							<li class="dropdown"><a class="pull-right dropdown-toggle" data-toggle="dropdown" href="#">
-								<em class="fa fa-cogs"></em>
-							</a>
-								<ul class="dropdown-menu dropdown-menu-right">
-									<li>
-										<ul class="dropdown-settings">
-											<li><a href="#">
-												<em class="fa fa-cog"></em> Settings 1
-											</a></li>
-											<li class="divider"></li>
-											<li><a href="#">
-												<em class="fa fa-cog"></em> Settings 2
-											</a></li>
-											<li class="divider"></li>
-											<li><a href="#">
-												<em class="fa fa-cog"></em> Settings 3
-											</a></li>
-										</ul>
-									</li>
-								</ul>
-							</li>
-						</ul>
-						<span class="pull-right clickable panel-toggle panel-button-tab-left"><em class="fa fa-toggle-up"></em></span></div>
+						<span class="pull-right clickable panel-toggle panel-button-tab-left"><i class="fas fa-caret-square-down"></i></span></div>
 					<div class="panel-body">
 						<div class="canvas-wrapper">
 							<canvas class="main-chart" id="line-chart" height="{{ isMobile ? 500 : 207 }}" width="600"></canvas>
@@ -121,30 +99,7 @@
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						Languages
-						<ul class="pull-right panel-settings panel-button-tab-right">
-							<li class="dropdown"><a class="pull-right dropdown-toggle" data-toggle="dropdown" href="#">
-								<em class="fa fa-cogs"></em>
-							</a>
-								<ul class="dropdown-menu dropdown-menu-right">
-									<li>
-										<ul class="dropdown-settings">
-											<li><a href="#">
-												<em class="fa fa-cog"></em> Settings 1
-											</a></li>
-											<li class="divider"></li>
-											<li><a href="#">
-												<em class="fa fa-cog"></em> Settings 2
-											</a></li>
-											<li class="divider"></li>
-											<li><a href="#">
-												<em class="fa fa-cog"></em> Settings 3
-											</a></li>
-										</ul>
-									</li>
-								</ul>
-							</li>
-						</ul>
-						<span class="pull-right clickable panel-toggle panel-button-tab-left"><em class="fa fa-toggle-up"></em></span></div>
+						<span class="pull-right clickable panel-toggle panel-button-tab-left"><i class="fas fa-caret-square-down"></i></span></div>
 					<div class="panel-body">
 						<div class="canvas-wrapper">
 							<canvas class="chart" id="pie-chart" ></canvas>
@@ -167,53 +122,52 @@
 						</div>
 					</div>
 			<% } %>
-			<!--
-			<div class="col-xs-6 col-md-3">
-				<div class="panel panel-default">
-					<div class="panel-body easypiechart-panel">
-						<h4>New Orders</h4>
-						<div class="easypiechart" id="easypiechart-blue" data-percent="92" ><span class="percent">92%</span></div>
-					</div>
-				</div>
-			</div>
-			<div class="col-xs-6 col-md-3">
-				<div class="panel panel-default">
-					<div class="panel-body easypiechart-panel">
-						<h4>Comments</h4>
-						<div class="easypiechart" id="easypiechart-orange" data-percent="65" ><span class="percent">65%</span></div>
-					</div>
-				</div>
-			</div>
-			<div class="col-xs-6 col-md-3">
-				<div class="panel panel-default">
-					<div class="panel-body easypiechart-panel">
-						<h4>New Users</h4>
-						<div class="easypiechart" id="easypiechart-teal" data-percent="56" ><span class="percent">56%</span></div>
-					</div>
-				</div>
-			</div>
-			<div class="col-xs-6 col-md-3">
-				<div class="panel panel-default">
-					<div class="panel-body easypiechart-panel">
-						<h4>Visitors</h4>
-						<div class="easypiechart" id="easypiechart-red" data-percent="27" ><span class="percent">27%</span></div>
-					</div>
-				</div>
-			</div>
-		-->
 		</div><!--/.row-->
 		
 		<div class="row">
 			<div class="col-md-6">
-				
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						Lessons list
+						<span class="pull-right clickable panel-toggle"><i class="fas fa-caret-square-down"></i></span>
+					</div>
+					<div class="panel-body">
+						<table class="table">
+							<thread>
+								<th>Lesson Name</th>
+								<th>Lang</th>
+								<th>Progress</th>
+							</thread>
+							<% for (var i=0;i<lesson_list.length;i++) { %>
+								<tr>
+									<% pvalue = Math.floor(lesson_list[i].learnt_count / lesson_list[i].word_count * 100) %>
+									<td>
+										<a href="/lesson/<%= lesson_list[i].lesson_id %>" class="btn btn-sm btn-link" role="button"><%= lesson_list[i].fullname %></a>
+									</td>
+									<td>
+										<% if (lesson_list[i].lang == 'jp') { %>
+											<i class="flag-sm flag-sm-JP"></i>
+										<% } else { %>
+											<i class="flag-sm flag-sm-GB"></i>
+										<% } %>
+									</td>
+									<td>
+										<div class="easypiechart-sm easypiechart-default-sm" data-percent="<%= pvalue %>" ><span class="percent"><%= pvalue %></span></div>
+									</td>
+								</tr>
+							<% } %>
+						</table>
+					</div>
+				</div>
 			</div><!--/.col-->
 			
 			<div class="col-md-6">
-				
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						Suggestion
+					</div>
+				</div>
 			</div><!--/.col-->
-			<div class="col-sm-12">
-				<p class="back-link">Lumino Theme by <a href="https://www.medialoot.com">Medialoot</a></p>
-			</div>
 		</div><!--/.row-->
 	</div>	<!--/.main-->
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
@@ -262,7 +216,7 @@
 		}
 
 		getLessonList = <%- JSON.stringify(lesson_list) %>;
-		var lang, foundlang, lang_list = [];
+		var lang, foundlang;
 		var piecolor = [
 			{
 				color:"#30a5ff",
@@ -282,53 +236,57 @@
 			}
 		]
 		var langMap = {'jp': 'Japanese', 'en': 'English'}
+		var pielabel = [], piedata = [], piecolors = [];
 		for (var i=0;i<getLessonList.length;i++) {
 			lang = langMap[getLessonList[i].lang]
 			foundlang = false;
-			for (var j=0;j<lang_list.length;j++) {
-				if (lang_list[j].label == lang) {
-					lang_list[j].value++;
+			for (var j=0;j<pielabel.length;j++) {
+				if (pielabel[j] == lang) {
+					piedata[j]++;
 					foundlang = true;
 					break;
 				}
 			}
 			if (!foundlang) {
-				lang_list.push({label: lang, value: 1, color: piecolor[lang_list.length].color, highlight: piecolor[lang_list.length].highlight});
+				pielabel.push(lang);
+				piedata.push(1);
+				piecolors.push(piecolor[pielabel.length].color);
 			}
 		}
-      var pielabel = [], piedata = [], piecolors = [];
-      for (var i=0;i<lang_list.length;i++) {
-           pielabel.push(lang_list[i].label)
-piedata.push(lang_list[i].value)
-piecolors.push(lang_list[i].color)
-}
 
 		window.onload = function () {
 			var chart1 = document.getElementById("line-chart").getContext("2d");
-			window.myLine = new Chart(chart1,{
-         type: "line",
-         data: lineChartData, 
-         options: {
-				responsive: true,
-				scaleLineColor: "rgba(0,0,0,.2)",
-				scaleGridLineColor: "rgba(0,0,0,.05)",
-				scaleFontColor: "#c5c7cc",
-				integerSteps: true
-			}});
+			window.myLine = new Chart(chart1, {
+				type: "line",
+				data: lineChartData, 
+				options: {
+					responsive: true,
+					scaleLineColor: "rgba(0,0,0,.2)",
+					scaleGridLineColor: "rgba(0,0,0,.05)",
+					scaleFontColor: "#c5c7cc",
+					integerSteps: true,
+					legend: {
+						display: false
+					}
+				}
+			});
+
 			var chart4 = document.getElementById("pie-chart").getContext("2d");
-				window.myPie = new Chart(chart4, {
-          type: "pie",
-          data: {
-              labels: pielabel,
-              datasets: [{
-                  label: "Language",
-                  backgroundColor: piecolors,
-                  data: piedata
-          }]}, 
-          options: {
-				responsive: true,
-				segmentShowStroke: false
-			}});
+			window.myPie = new Chart(chart4, {
+          		type: "pie",
+          		data: {
+              		labels: pielabel,
+              		datasets: [{
+                  		label: "Language",
+                  		backgroundColor: piecolors,
+                  		data: piedata
+					  }]
+				}, 
+          		options: {
+					responsive: true,
+					segmentShowStroke: false
+				}
+			});
 		};
 	</script>	
 </body>

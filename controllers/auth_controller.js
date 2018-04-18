@@ -2,6 +2,7 @@ var appConfig = require('../config');
 var passport = require('passport');
 
 var Account = require('../models/account');
+var Profile = require('../models/profile');
 
 var Recaptcha = require('express-recaptcha').Recaptcha;
 var captcha_secret = process.env.CPT_SECRET || appConfig.captcha_secret;
@@ -19,9 +20,18 @@ exports.post_register = function(req, res) {
                 if (err) {
                     return res.render('register', { user : user });
                 }
-                passport.authenticate('local')(req, res, function () {
-                    res.redirect('/');
-                });
+                var profile = {
+                    username: req.body.username,
+                    score: 0,
+                    firstname: '',
+                    lastname: ''
+                }
+                var newprofile = new Profile(profile);
+                newprofile.save(function(err){
+                    passport.authenticate('local')(req, res, function () {
+                        res.redirect('/');
+                    });
+                })
             });
         } else {
             //error code

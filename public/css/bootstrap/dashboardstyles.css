@@ -900,6 +900,25 @@ h1.page-header {
   top: 38px;
   width: 120px; }
 
+.easypiechart-sm {
+  position: relative;
+  text-align: center;
+  width: 30px;
+  height: 30px;
+}
+  
+.easypiechart-sm .percent {
+  display: block;
+  position: absolute;
+  font-size: 10px;
+  top: 8px;
+  width: 30px; }
+
+.flag-sm {
+  position: relative;
+  top: 7px;
+}
+
 #easypiechart-blue .percent {
   color: #30a5ff; }
 
