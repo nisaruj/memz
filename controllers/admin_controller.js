@@ -115,7 +115,7 @@ exports.get_lesson_csv = function(req, res) {
             for (var i=0;i<lesson_res.vocab.length;i++) {
                 content += lesson_res.vocab[i].word + "," + lesson_res.vocab[i].meaning + '\n';
             }
-            fs.writeFile("./tmp/" + filename + '.csv', content, function(err) {
+            fs.writeFile(__dirname + '/../tmp/' + filename + '.csv', content, function(err) {
                 if(err) {
                     return console.log(err);
                 }
