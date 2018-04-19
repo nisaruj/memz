@@ -136,3 +136,70 @@ h2, h2.text-center, h2.lessonname {
     width:240px;
     height:74px;
 }
+
+/* entire container, keeps perspective */
+.flip-container {
+	perspective: 1000px;
+}
+	/* flip the pane when hovered */
+.flip-container:hover .flipper, .flip-container.hover .flipper {
+	transform: rotateY(180deg);
+	}
+
+.flip-container, .front, .back {
+	width: 320px;
+	height: 250px;
+  }
+
+/* flip speed goes here */
+.flipper {
+	transition: 0.6s;
+	transform-style: preserve-3d;
+	position: relative;
+}
+
+/* hide back of pane during swap */
+.front, .back {
+	backface-visibility: hidden;
+	position: absolute;
+	top: 0;
+	left: 0;
+  background-color: white;
+  box-shadow: 7px 7px 20px #e0e0e0;
+  border-radius: 5px;
+
+}
+
+/* front pane, placed above back */
+.front {
+	z-index: 2;
+	/* for firefox 31 */
+	transform: rotateY(0deg);
+}
+
+/* back, initially hidden pane */
+.back {
+	transform: rotateY(180deg);
+}
+
+.flipcard {
+   position: absolute;
+   left: 50%;
+   margin-left: -150px;
+   margin-top: -150px;
+  padding-top: 180px;
+}
+
+.word {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.buttons {
+  width: 320px;
+  padding-top: 50px;
+  left: 50%;
+  text-align: center;
+}

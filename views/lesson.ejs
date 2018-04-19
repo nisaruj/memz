@@ -42,8 +42,7 @@
         </div>
     </div>
     <div class="container">
-        <h2 class="text-center"><%= _lesson.course %></h2>
-        <h3 class="text-center"><%= _lesson.name %></h3>
+        <h3 class="text-center"><%= _lesson.course %> <%= _lesson.lesson_id %></h3>
         <a href="./<%= _lesson.lesson_id %>/review" class="btn btn-outline-info" role="button">Review</a>
         <a href="./<%= _lesson.lesson_id %>/flashcard" class="btn btn-outline-info" role="button">Flashcard</a>
         <table class="table table-striped">

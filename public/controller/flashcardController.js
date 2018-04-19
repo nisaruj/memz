@@ -12,6 +12,7 @@ app.controller('flashcard-control', ['$scope', '$http', function($scope, $http){
         $scope.lesson_name = getLessonName;
         $scope.lesson_course = getLessonCourse;
         $scope.curWord = 'Loading question ...';
+        $scope.getLID = getLID
         return $http.get('/lesson/get_qset/' + getLID.toString()).then(function(response){
             getQuiz = response.data._lesson.vocab;
             console.log(getQuiz);
