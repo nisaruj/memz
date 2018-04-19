@@ -144,12 +144,12 @@ h2, h2.text-center, h2.lessonname {
 	/* flip the pane when hovered */
 .flip-container:hover .flipper, .flip-container.hover .flipper {
 	transform: rotateY(180deg);
-	}
+}
 
 .flip-container, .front, .back {
 	width: 320px;
 	height: 250px;
-  }
+}
 
 /* flip speed goes here */
 .flipper {
@@ -160,14 +160,14 @@ h2, h2.text-center, h2.lessonname {
 
 /* hide back of pane during swap */
 .front, .back {
-	backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 	position: absolute;
 	top: 0;
 	left: 0;
   background-color: white;
   box-shadow: 7px 7px 20px #e0e0e0;
   border-radius: 5px;
-
 }
 
 /* front pane, placed above back */
@@ -183,10 +183,10 @@ h2, h2.text-center, h2.lessonname {
 }
 
 .flipcard {
-   position: absolute;
-   left: 50%;
-   margin-left: -150px;
-   margin-top: -150px;
+  position: absolute;
+  left: 50%;
+  margin-left: -150px;
+  margin-top: -150px;
   padding-top: 180px;
 }
 
@@ -195,6 +195,15 @@ h2, h2.text-center, h2.lessonname {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.word-reading {
+  position: fixed;
+  top: 65%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #bbbbbb;
+  font-size: 20px;
 }
 
 .buttons {
