@@ -120,7 +120,7 @@ exports.get_lesson_csv = function(req, res) {
                     return console.log(err);
                 }
                 console.log("The file was saved!");
-                res.download('tmp/' + filename + '.csv');
+                res.download(__dirname + '/../tmp/' + filename + '.csv');
             }); 
         });
     } else {
