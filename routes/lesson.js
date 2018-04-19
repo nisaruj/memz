@@ -15,6 +15,9 @@ router.get('/:lesson_id', lesson_controller.get_vocab_in_lesson);
 //Get lesson review
 router.get('/:lesson_id/review', lesson_controller.review_section);
 
+//Get lesson flashcard
+router.get('/:lesson_id/flashcard', lesson_controller.flashcard_section);
+
 //Receive review result from client
 router.post('/:lesson_id/review', lesson_controller.receive_review_result);
 

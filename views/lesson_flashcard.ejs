@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="flashcard" ng-controller="flashcard-control">
 <head>
     <title>MEMZ</title>
     <link rel="icon" href="/favicon.png" />
@@ -7,10 +7,11 @@
     <link rel="stylesheet" type="text/css" href="/css/stylesheet.css">
     <link rel="stylesheet" type="text/css" href="/css/navbar_stylesheet.css">
     <script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js" integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+" crossorigin="anonymous"></script>
-    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Raleway:700" rel="stylesheet">
     <meta charset="utf-8" />
 </head>
+<script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<script src="/controller/flashcardController.js"></script>
 <body class="gray">
    <div class="navbar navbar-expand-md" id="navbar">
         <div>
@@ -42,30 +43,24 @@
         </div>
     </div>
     <div class="container">
-        <h2 class="text-center"><%= _lesson.course %></h2>
-        <h3 class="text-center"><%= _lesson.name %></h3>
-        <a href="./<%= _lesson.lesson_id %>/review" class="btn btn-outline-info" role="button">Review</a>
-        <a href="./<%= _lesson.lesson_id %>/flashcard" class="btn btn-outline-info" role="button">Flashcard</a>
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Vocab</th>
-                    <th scope="col">Meaning</th>
-                </tr>
-            </thead>
-            <% for(var i=0; i < _lesson.vocab.length; i++) { %>
-                <tr>
-                    <td><%= i+1 %></td>
-                    <td><%= _lesson.vocab[i].word %></td>
-                    <td><%= _lesson.vocab[i].meaning %></td>
-                </tr>
-            <% } %>
-        </table>
-    </div>
-
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <h2 class="text-center">{{ lesson_name }}</h2>
+        <h3 class="text-center">{{ lesson_course }}</h3>
+        <div>
+            Word: {{ curWord }} <br>
+            Meaning: {{ curMeaning }}
+            <br>
+            <button type="submit" class="btn btn-orange" ng-click="nextWord()" ng-disabled="disableSubmit">Next</button>
+            <button type="submit" class="btn btn-orange" ng-click="prevWord()" ng-disabled="disableSubmit">Prev</button>
+        </div>
+    </div> 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+
 </body>
+<script>
+    var getLang = <%- JSON.stringify(_lesson.lang) %>;
+    var getLID = <%- JSON.stringify(_lesson.lesson_id) %>;
+    var getLessonName = <%- JSON.stringify(_lesson.name) %>;
+    var getLessonCourse = <%- JSON.stringify(_lesson.course) %>;
+</script>
 </html>

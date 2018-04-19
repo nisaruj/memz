@@ -21,6 +21,12 @@ exports.get_vocab_in_lesson = function(req, res) {
     });
 };
 
+exports.flashcard_section = function(req, res) {
+    Lesson.findOne({lesson_id: req.params.lesson_id}, function(err,lesson_res) {
+        res.render('lesson_flashcard', {user:req.user, _lesson:lesson_res});
+    });
+};
+
 exports.review_section = function(req, res) {
     Lesson.findOne({lesson_id: req.params.lesson_id}, function(err,lesson_res) {
         res.render('lesson_review', {
