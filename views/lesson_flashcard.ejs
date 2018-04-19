@@ -43,16 +43,24 @@
         </div>
     </div>
     <div class="container">
-        <h2 class="text-center">{{ lesson_name }}</h2>
-        <h3 class="text-center">{{ lesson_course }}</h3>
-        <div>
-            Word: {{ curWord }} <br>
-            Meaning: {{ curMeaning }}
-            <br>
+        <h3 class="text-center">{{ lesson_course }} {{ getLID }}</h3>
+        <div class="flipcard">
+        <div class="flip-container" ontouchstart="this.classList.toggle('hover');">
+	         <div class="flipper">
+		           <div class="front">
+			              <h3 class="word">{{ curWord }}</h3>
+		           </div>
+		           <div class="back">
+			              <h3 class="word">{{ curMeaning }}</h3>
+		                       </div>
+	             </div>
+            </div>
+            <div class="buttons">
             <button type="submit" class="btn btn-orange" ng-click="nextWord()" ng-disabled="disableSubmit">Next</button>
             <button type="submit" class="btn btn-orange" ng-click="prevWord()" ng-disabled="disableSubmit">Prev</button>
-        </div>
-    </div> 
+          </div>
+          </div>
+    </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
 
