@@ -228,3 +228,13 @@ h2, h2.text-center, h2.lessonname {
   left: 50%;
   text-align: center;
 }
+
+/*whatever*/
+.word-reading {
+  position: fixed;
+  top: 65%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #bbbbbb;
+  font-size: 20px;
+}
