@@ -167,11 +167,12 @@ h2, h2.text-center, h2.lessonname {
 	/*flip the card when hovered*/
 .flip-container:hover .flipper, .flip-container.hover .flipper {
 	transform: rotateY(180deg);
-	}
+}
+
 .flip-container, .front, .back {
 	width: 320px;
 	height: 250px;
-  }
+}
 
 /*flip speed */
 .flipper {
@@ -183,13 +184,13 @@ h2, h2.text-center, h2.lessonname {
 /*hide back of card during swap*/
 .front, .back {
 	backface-visibility: hidden;
+   -webkit-backface-visibility: hidden;
 	position: absolute;
 	top: 0;
 	left: 0;
-  background-color: white;
-  box-shadow: 7px 7px 20px #e0e0e0;
-  border-radius: 5px;
-
+   background-color: white;
+   box-shadow: 7px 7px 20px #e0e0e0;
+   border-radius: 5px;
 }
 
 /*place front above back*/
