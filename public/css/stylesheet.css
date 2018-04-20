@@ -1,79 +1,47 @@
+/*--01 PRIMARY STYLES--*/
+
+/*fonts*/
+
+/*font family*/
+p,a,h1,h2,h3,h4,h5,h6 {
+    font-family: 'raleway';
+}
+
+/*paragraph font size*/
+p {
+  font-size: 10px;
+}
+
+/*link color*/
+a {
+  color: #FF5733;
+}
+
+/*main header size*/
+h2, h2.text-center, h2.lessonname {
+  font-size: 32px;
+  font-weight: 200;
+  padding-bottom: 30px;
+  text-align: center;
+}
+
+/*set color to white if class 'white' is set*/
+.white {
+  color: white;
+}
+
+/*background*/
+
+/*dark background if class 'dark' is set*/
 .dark {
   background-color: #333;
 }
-
+/*dark background if class 'gray' is set*/
 .gray {
   background-color: #efefef;
 }
 
-p {
-    font-family: raleway;
-    font-size: 10px;
-}
-
-.white {
-    color: white;
-}
-
-a {
-    color: #FF5733;
-}
-
-h1,h2,h3,h4 {
-    font-family: 'raleway';
-}
-
-.sign {
-    padding-bottom: 35px;
-}
-
-.logincontainer {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-.username, .password, .email {
-    font-family: 'raleway';
-    font-size: 1em;
-    color:#333;
-    padding: 15px;
-}
-
-.input {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-
-    border: none;
-    width: 272px;
-    height: 20px;
-    color: rgb(0, 0, 0);
-    border-radius: 3%;
-    box-shadow: none;
-}
-
-.submitform {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-
-    border: none;
-    transition: 0.5s;
-    font-family: 'raleway-bold';
-    font-size: 0.8em;
-    background-color: #FF5733;
-    color: white;
-    height: 40px;
-    width: 303px;
-}
-
-.submitform:hover {
-    border-style: solid;
-    border-width: 3px;
-    border-color: #FF5733;
-    background: none;
-}
-
+/*buttons*/
 .btn {
   font-family: 'raleway';
   text-transform: uppercase;
@@ -83,6 +51,7 @@ h1,h2,h3,h4 {
   transition: 0.5s;
 }
 
+/*main button (equal to button-success)*/
 .btn-orange {
   background-color: #ff5733;
   border: solid 3px #ff5733;
@@ -91,12 +60,73 @@ h1,h2,h3,h4 {
   color: white;
 }
 
+/*on hover*/
 .btn-orange:hover {
   background: none;
   border: solid 3px #ff5733;
   color: #ff5733;
 }
 
+/*--02 LOGIN & SIGN UP FORM--*/
+
+/*set div to the middle*/
+.logincontainer {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/*placeholder*/
+.username, .password, .email {
+  font-family: 'raleway';
+  font-size: 1em;
+  color:#333;
+  padding: 15px;
+}
+
+/*input box size*/
+.input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  border: none;
+  width: 272px;
+  height: 20px;
+  color: rgb(0, 0, 0);
+  border-radius: 3%;
+  box-shadow: none;
+}
+
+/*recaptcha size*/
+.g-recaptcha {
+  width:240px;
+  height:74px;
+}
+
+/*submit button appearance*/
+.submitform {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  border: none;
+  transition: 0.5s;
+  font-family: 'raleway-bold';
+  font-size: 0.8em;
+  background-color: #FF5733;
+  color: white;
+  height: 40px;
+  width: 303px;
+}
+/*display border only on hover*/
+.submitform:hover {
+  border-style: solid;
+  border-width: 3px;
+  border-color: #FF5733;
+  background: none;
+}
+
+/*--03 HOMEPAGE--*/
+
+/*lessons list grid*/
 .lesson {
   background-color: white;
   border-radius: 5px;
@@ -110,78 +140,71 @@ h1,h2,h3,h4 {
   box-shadow: 7px 7px 20px #e0e0e0;
 }
 
+/*typical grid setting*/
 .row:after {
-    content: "";
-    display: table;
-    clear: both;
+  content: "";
+  display: table;
+  clear: both;
 }
 
+/*set container padding*/
 .container {
   position: relative;
   padding-top: 180px;
 }
 
-h2, h2.text-center, h2.lessonname {
-  font-size: 32px;
-  font-weight: 200;
-  padding-bottom: 30px;
-  text-align: center;
-}
-
+/*flags position*/
 .f32 {
   padding-bottom: 15px;
 }
 
-.g-recaptcha {
-    width:240px;
-    height:74px;
-}
+/*--04 FLASHCARD--*/
 
-/* entire container, keeps perspective */
+/*entire card's perspective*/
 .flip-container {
 	perspective: 1000px;
 }
-	/* flip the pane when hovered */
+	/*flip the card when hovered*/
 .flip-container:hover .flipper, .flip-container.hover .flipper {
 	transform: rotateY(180deg);
-}
-
+	}
 .flip-container, .front, .back {
 	width: 320px;
 	height: 250px;
-}
+  }
 
-/* flip speed goes here */
+/*flip speed */
 .flipper {
 	transition: 0.6s;
 	transform-style: preserve-3d;
 	position: relative;
 }
 
-/* hide back of pane during swap */
+/*hide back of card during swap*/
 .front, .back {
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
+	backface-visibility: hidden;
 	position: absolute;
 	top: 0;
 	left: 0;
   background-color: white;
   box-shadow: 7px 7px 20px #e0e0e0;
   border-radius: 5px;
+
 }
 
-/* front pane, placed above back */
+/*place front above back*/
 .front {
 	z-index: 2;
 	/* for firefox 31 */
 	transform: rotateY(0deg);
 }
 
-/* back, initially hidden pane */
+/*hide back*/
 .back {
 	transform: rotateY(180deg);
 }
 
+/*set card position to the middle*/
 .flipcard {
   position: absolute;
   left: 50%;
@@ -190,6 +213,7 @@ h2, h2.text-center, h2.lessonname {
   padding-top: 180px;
 }
 
+/*set word to the middle*/
 .word {
   position: fixed;
   top: 50%;
@@ -197,6 +221,15 @@ h2, h2.text-center, h2.lessonname {
   transform: translate(-50%, -50%);
 }
 
+/*align div containing buttons*/
+.buttons {
+  width: 320px;
+  padding-top: 50px;
+  left: 50%;
+  text-align: center;
+}
+
+/*whatever*/
 .word-reading {
   position: fixed;
   top: 65%;
@@ -204,11 +237,4 @@ h2, h2.text-center, h2.lessonname {
   transform: translate(-50%, -50%);
   color: #bbbbbb;
   font-size: 20px;
-}
-
-.buttons {
-  width: 320px;
-  padding-top: 50px;
-  left: 50%;
-  text-align: center;
 }
