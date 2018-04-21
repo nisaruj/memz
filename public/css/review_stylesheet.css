@@ -11,8 +11,8 @@
 
 .card-body-init {
   width: 300px !important;
-  background: -moz-linear-gradient(top, rgba(255,255,255, 0.9) 0%, rgba(41,137,216,0) 20%, rgba(255,48,48,1) 21%, rgba(255,255,255, 0.9) 100%); /* FF3.6+ */
-  background: -webkit-linear-gradient(top, #e8e8e8 0%,#e8e8e8 30%,#fff 21%,#fff 100%); /* Chrome10+,Safari5.1+ */
+  background: -moz-linear-gradient(top, #e8e8e8 0%,#e8e8e8 40%,#fff 21%,#fff 100%); /* FF3.6+ */
+  background: -webkit-linear-gradient(top, #e8e8e8 0%,#e8e8e8 40%,#fff 21%,#fff 100%); /* Chrome10+,Safari5.1+ */
   background-color: white;
   position: absolute;
   top: 55%;
@@ -86,13 +86,13 @@
   padding: 30px;
 }
 
-.input { 
-  left: 10px;
+.input {
   color: #666;
   position: relative;
-  display: inline-block;
+  width: 195px;
   border: none;
   border-bottom: solid 1px #B3B6B7;
+  margin: 0 auto;
 }
 
 .input:after {
@@ -107,8 +107,8 @@
 }
 
 .input:hover:after {
-	width: 219px;
-  margin-left: -109px;
+	width: 195px;
+  margin-left: -98px;
 }
 
 #m:focus {
@@ -149,7 +149,6 @@
 }
 
 .lessoncourse {
-  font-weight: 800;
   color: #333;
 }
 
