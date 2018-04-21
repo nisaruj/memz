@@ -109,7 +109,7 @@ h2, h2.text-center, h2.lessonname {
   -moz-appearance: none;
   border: none;
   transition: 0.5s;
-  font-family: 'raleway-bold';
+  font-family: 'raleway';
   font-size: 0.8em;
   background-color: #FF5733;
   color: white;
