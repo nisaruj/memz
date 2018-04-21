@@ -12,7 +12,7 @@
 	<link href="css/flat-flags.min.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Raleway:700" rel="stylesheet">
-	
+
 	<!--Custom Font-->
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 	<!--[if lt IE 9]>
@@ -37,15 +37,15 @@
 			</div>
 		</div><!-- /.container-fluid -->
 	</nav>
-		
+
 	<div class="container">
-		
+
 		<div class="row">
 			<div class="col-lg-12">
 				<h1 class="page-header">Dashboard</h1>
 			</div>
 		</div><!--/.row-->
-		
+
 		<div class="panel panel-container">
 			<div class="row">
 				<div class="col-xs-6 col-md-3 col-lg-3 no-padding">
@@ -108,7 +108,7 @@
 				</div>
 			</div>
 		</div><!--/.row-->
-		
+
 		<div class="row">
 			<% var pvalue, piecolor = ['blue', 'orange', 'teal', 'red']; %>
 			<% for (var i=0;i<Math.min(lesson_list.length,4);i++) { %>
@@ -123,7 +123,7 @@
 					</div>
 			<% } %>
 		</div><!--/.row-->
-		
+
 		<div class="row">
 			<div class="col-md-6">
 				<div class="panel panel-default">
@@ -160,7 +160,7 @@
 					</div>
 				</div>
 			</div><!--/.col-->
-			
+
 			<div class="col-md-6">
 				<div class="panel panel-default">
 					<div class="panel-heading">
@@ -258,7 +258,7 @@
 			var chart1 = document.getElementById("line-chart").getContext("2d");
 			window.myLine = new Chart(chart1, {
 				type: "line",
-				data: lineChartData, 
+				data: lineChartData,
 				options: {
 					responsive: true,
 					scaleLineColor: "rgba(0,0,0,.2)",
@@ -281,13 +281,13 @@
                   		backgroundColor: piecolors,
                   		data: piedata
 					  }]
-				}, 
+				},
           		options: {
 					responsive: true,
 					segmentShowStroke: false
 				}
 			});
 		};
-	</script>	
+	</script>
 </body>
 </html>

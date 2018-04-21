@@ -43,8 +43,10 @@
     </div>
     <div class="container">
         <h3 class="text-center"><%= _lesson.course %> <%= _lesson.lesson_id %></h3>
-        <a href="./<%= _lesson.lesson_id %>/review" class="btn btn-outline-info" role="button">Review</a>
-        <a href="./<%= _lesson.lesson_id %>/flashcard" class="btn btn-outline-info" role="button">Flashcard</a>
+        <div class="buttons intable">
+        <a href="./<%= _lesson.lesson_id %>/review" class="btn btn-orange" role="button">Review</a>
+        <a href="./<%= _lesson.lesson_id %>/flashcard" class="btn btn-orange" role="button">Flashcard</a>
+      </div>
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -61,6 +63,10 @@
                 </tr>
             <% } %>
         </table>
+        <div class="buttons intable">
+        <a href="./<%= _lesson.lesson_id %>/review" class="btn btn-orange" role="button">Review</a>
+        <a href="./<%= _lesson.lesson_id %>/flashcard" class="btn btn-orange" role="button">Flashcard</a>
+      </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

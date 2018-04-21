@@ -56,7 +56,6 @@ h2, h2.text-center, h2.lessonname {
   background-color: #ff5733;
   border: solid 3px #ff5733;
   border-radius: 20px;
-  width: 85px;
   color: white;
 }
 
@@ -151,6 +150,7 @@ h2, h2.text-center, h2.lessonname {
 .container {
   position: relative;
   padding-top: 180px;
+  padding-bottom: 50px;
 }
 
 /*flags position*/
@@ -230,6 +230,11 @@ h2, h2.text-center, h2.lessonname {
   text-align: center;
 }
 
+.intable {
+  width: 1110px;
+  padding: 30px;
+}
+
 /*whatever*/
 .word-reading {
   position: fixed;
@@ -238,4 +243,16 @@ h2, h2.text-center, h2.lessonname {
   transform: translate(-50%, -50%);
   color: #bbbbbb;
   font-size: 20px;
+}
+
+/*--05 FOOTER*/
+
+.footer {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
+  background-color: #efefef;
+  text-align: center;
 }
