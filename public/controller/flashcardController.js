@@ -6,6 +6,7 @@ app.controller('flashcard-control', ['$scope', '$http', function($scope, $http){
     var getWord = function() {
         $scope.curWord = getQuiz[curIndex].word;
         $scope.curMeaning = getQuiz[curIndex].meaning;
+        $scope.goReview = (getQuiz.length - 1 == curIndex);
         if (getLang == 'jp') {
             $scope.curWordReading = wanakana.toRomaji(getQuiz[curIndex].word);
         }
@@ -17,6 +18,7 @@ app.controller('flashcard-control', ['$scope', '$http', function($scope, $http){
         $scope.curWord = 'Loading question ...';
         $scope.getLID = getLID;
         $scope.curWordReading = '';
+        $scope.goReview = false;
         return $http.get('/lesson/get_qset/' + getLID.toString()).then(function(response){
             getQuiz = response.data._lesson.vocab;
             console.log(getQuiz);
