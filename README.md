@@ -14,7 +14,7 @@ Before running the server, you will need MongoDB Database and Google's recaptcha
 
 ### Installing ###
 
-Change your MongoDB connection_string, secret key for authentication and captcha secret in config.json file (and keep them secret!).
+Change your MongoDB connection_string, secret key for authentication and captcha secret in config.json file (also keep them secret!).
 ```
 "connection_string": "YOUR_DATABASE_URI_STRING",
 ...
@@ -30,7 +30,7 @@ In case you use Heroku, add config variables in settings tab.
 | Config Vars    | Value                       |
 | -------------- | --------------------------- |
 | DB_STR         | database connection string  |
-| CPT_SECRET     | recaptcha secret            |
+| CPT_SECRET     | reCAPTCHA secret            |
 | SESSION_SECRET | authentication secret       |
 
 ## TODO ##
@@ -42,8 +42,7 @@ In case you use Heroku, add config variables in settings tab.
 - [x] Add dashboard - score/streak/lang
 - [x] Add lesson delete button
 - [x] Add Lang filter
-- [ ] Fix admin table
-- [ ] Add csv backup button
+- [x] Add csv backup button
 
 ## Dependencies ##
 - body-parser 1.18.2
