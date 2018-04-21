@@ -101,5 +101,23 @@ app.controller('result-control', ['$scope', function($scope){
     $scope._vocab = review_stat._lesson.vocab;
     $scope._overall = review_stat._overall;
     $scope.notLoggedIn = !isLoggedIn;
+    $scope.curStat = null;
+
+    $scope.getStat = function(event) {
+        var el = getElement(event);
+        var stat_ind = parseInt(el[0].id);
+        $scope.curStat = {
+            id: stat_ind+1,
+            word: review_stat._lesson.vocab[stat_ind].word,
+            meaning: review_stat._lesson.vocab[stat_ind].meaning,
+            correct: review_stat._overall[stat_ind].review_correct,
+            total: review_stat._overall[stat_ind].review_total
+        }
+        console.log(el[0].id);
+    }
+
+    var getElement = function(event) {
+        return angular.element(event.srcElement || event.target);
+    }
 }]);
 

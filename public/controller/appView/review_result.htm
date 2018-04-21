@@ -9,12 +9,25 @@
             </tr>
         </table>
         <br><br>
-        <div align="center">
-            <table class="box">
-                <tr>
-                    <td ng-repeat="quiz in _overall track by $index" style="{{ 'background-color: rgb('+ Math.floor((1-quiz.review_correct/quiz.review_total) * 255) + ',255,' + Math.floor((1-quiz.review_correct/quiz.review_total) * 255).toString() +');' }}">{{ $index+1 }}</td>
-                </tr>
-            </table>
+        <div align="center" class="stat-container">
+            <h3 style="padding: 10px">Word Statistics</h3>
+            <div class="stat-box">
+                <div class="box box-inline" ng-mouseover="getStat($event)" ng-repeat="quiz in _overall track by $index" id="{{$index}}" style="{{ 'background-color: rgb('+ Math.floor((1-quiz.review_correct/quiz.review_total) * 255) + ',255,' + Math.floor((1-quiz.review_correct/quiz.review_total) * 255).toString() +');' }}"></div>
+                <pre ng-if="!curStat">Mouse over the squares below to see stat of each word.</pre>
+                <div ng-if="curStat">
+                    <pre>ID: {{ curStat.id }}</pre>
+                    <pre>Word: {{ curStat.word }}</pre>
+                    <pre>Meaning: {{ curStat.meaning }}</pre>
+                    <pre>Correct Ratio: {{ Math.round(curStat.correct/curStat.total*100)/100 }} ({{ curStat.correct }}/{{ curStat.total }})</pre>
+                </div>
+                <!--
+                <table class="box">
+                    <tr>
+                        <td ng-repeat="quiz in _overall track by $index" style="{{ 'background-color: rgb('+ Math.floor((1-quiz.review_correct/quiz.review_total) * 255) + ',255,' + Math.floor((1-quiz.review_correct/quiz.review_total) * 255).toString() +');' }}">{{ $index+1 }}</td>
+                    </tr>
+                </table>
+                -->
+                </div>
         </div>
         <div align="center" class="undertext">
             <br>
