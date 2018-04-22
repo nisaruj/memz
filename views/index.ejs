@@ -46,6 +46,12 @@
 
     <div class="container">
         <h2 class="text-center">All lessons</h2>
+        <br>
+        <div class="lang-filter">
+            <a href="/lesson/" class="btn btn-orange" role="button">All</a>
+            <a href="/lesson/filter/en" class="btn btn-orange" role="button">English</a>
+            <a href="/lesson/filter/jp" class="btn btn-orange" role="button">Japanese</a>
+        </div>
         <div class="row">
             <div>
             <% for(var i=0; i < _lesson.length; i++) { %>

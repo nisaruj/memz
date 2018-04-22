@@ -40,6 +40,7 @@ exports.receive_review_result = function(req, res) {
     var day_now = new Date();
     var queryLessonAndRender = function(correct, allQuiz){
         const correctSet = new Set(correct);
+        const allQuizSet = new Set(allQuiz);
         var stat = []
         var overall = []
         for (var i=0;i<allQuiz.length;i++) {
@@ -84,7 +85,7 @@ exports.receive_review_result = function(req, res) {
                 });
             } else {
                 for (var i=0;i<lesson.vocab.length;i++) {
-                    overall.push({id: i+1, review_correct: correctSet.has(i+1)?1:0, review_total: 1});
+                    overall.push({id: i+1, review_correct: correctSet.has(i+1)?1:0, review_total: allQuizSet.has(i+1)?1:0});
                 }
                 console.log('Result sent.');
                 return res.json({

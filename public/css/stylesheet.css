@@ -158,6 +158,11 @@ h2, h2.text-center, h2.lessonname {
   padding-bottom: 15px;
 }
 
+/*filter container*/
+.lang-filter {
+  padding-left: 32px;
+}
+
 /*--04 FLASHCARD--*/
 
 /*entire card's perspective*/
